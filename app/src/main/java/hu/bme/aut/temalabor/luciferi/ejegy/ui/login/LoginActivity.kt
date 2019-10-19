@@ -108,20 +108,16 @@ class LoginActivity : AppCompatActivity() {
         //ahhoz hogy adatot kaphassunk vissza a szálról, egy interface-t valósítunk meg,
         //amellyel meghívhatunk egy függvényt a szálon zajló folyamat végeztével (itt: beírjuk az adatokat és bejelentkezünk)
 
-        MyAsyncTask(db, object : MyAsyncTask.AsyncResponse{
-            override fun processFinish(user: User?) {
-                if (user != null){
-                    if (!user.email.isNullOrEmpty() and !user.password.isNullOrEmpty()) {
-                        emptyUserList = false
-                        username.setText(user.email)
-                        password.setText(user.password)
+        MyAsyncTask(db){user ->
+            if (!user.email.isNullOrEmpty() and !user.password.isNullOrEmpty()) {
+                emptyUserList = false
+                username.setText(user.email)
+                password.setText(user.password)
 
-                        loading.visibility = View.VISIBLE
-                        loginViewModel.login(username.text.toString(), password.text.toString())
-                    }
-                }
+                loading.visibility = View.VISIBLE
+                loginViewModel.login(username.text.toString(), password.text.toString())
             }
-        }).execute()
+        }.execute()
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
@@ -166,8 +162,9 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
-private class MyAsyncTask(val db : AppDatabase) : AsyncTask<Unit, Unit, User>() {
-    override fun doInBackground(vararg params: Unit?): User {
+
+private class MyAsyncTask(val db : AppDatabase, val callback : (User) -> Unit) : AsyncTask<User, Unit, User>() {
+    override fun doInBackground(vararg params: User): User {
         val previousUsers = db.userDao().getAll()
         if (previousUsers.isNotEmpty()) {
             return previousUsers.last()
@@ -175,18 +172,8 @@ private class MyAsyncTask(val db : AppDatabase) : AsyncTask<Unit, Unit, User>() 
         return User(null,"","")     //üres user
     }
 
-    interface AsyncResponse {
-        fun processFinish(user: User?)
-    }
-
-    var delegate: AsyncResponse? = null
-
-    constructor(db : AppDatabase, delegate: AsyncResponse) : this(db) {
-        this.delegate = delegate
-    }
-
-    override fun onPostExecute(result: User?) {
+    override fun onPostExecute(result: User) {
         super.onPostExecute(result)
-        delegate?.processFinish(result)
+        callback.invoke(result)
     }
 }
