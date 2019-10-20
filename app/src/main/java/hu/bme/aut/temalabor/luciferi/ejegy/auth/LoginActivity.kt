@@ -37,19 +37,18 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        imageView.setColorFilter(Color.argb(150,200,200,200))
+        imageView.setColorFilter(Color.argb(50,200,200,200))
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
-            .add(R.id.login_fragment,RegisterFragment())
+            .add(R.id.login_fragment,LoginFragment())
             .commit()
 
-        //login backend elérése
-        /*MyAsyncLogIn(username,password){result ->
-            if (result.toInt() != 302){
-                throw Exception("Unauthorized")
-            }
-        }.execute()*/
+
+
+
+
+
 
         //Room adatkezelés
         /*db = AppDatabase(this)
@@ -105,28 +104,3 @@ private class AsyncGetDataFromRoom(val db : AppDatabase, val callback : (User) -
 
 
 
-private class MyAsyncLogIn(val username : String,val  password : String, val callback : (String) -> Unit) : AsyncTask<String, Unit, String>(){
-    override fun doInBackground(vararg p0: String): String {
-
-        try {
-            val url = URL("https://temalabor2019.azurewebsites.net/api/auth/login")
-            val conn = url.openConnection() as HttpURLConnection
-            conn.apply {
-                requestMethod = "POST"
-                doOutput = true
-                useCaches = false
-                outputStream.write("email=$username&password=$password".toByteArray())
-                outputStream.flush()
-            }
-            return conn.responseCode.toString()
-        } catch (e : IOException){
-            e.printStackTrace()
-        }
-        return "ERROR"
-    }
-
-    override fun onPostExecute(result: String) {
-        super.onPostExecute(result)
-        callback.invoke(result)
-    }
-}

@@ -14,7 +14,7 @@
         android:adjustViewBounds="true"
         android:cropToPadding="true"
         android:scaleType="fitXY"
-        android:src="@drawable/smartcitiesmobility"
+        android:src="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
