@@ -6,6 +6,8 @@
 
     <application
         android:allowBackup="true"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -15,7 +17,8 @@
             android:name=".bottom_navigation.MainActivity"
             android:label="@string/title_activity_main"></activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".auth.LoginActivity"
+            android:theme="@style/generalnotitle"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

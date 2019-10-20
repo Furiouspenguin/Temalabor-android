@@ -13,4 +13,16 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bkk_e_jegy">BKK e-Jegy</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="register_now_text">Haven\'t registered yet?</string>
+    <string name="sign_up_text">Sign up!</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="prompt_password_confirm">Confirm password</string>
+    <string name="sign_in_text">Sign in!</string>
+    <string name="login_now_text">Do you already have an account?</string>
 </resources>
