@@ -9,9 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.afterTextChanged
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.UserClient
 import kotlinx.android.synthetic.main.fragment_login.*
 import okhttp3.*
 import okhttp3.internal.cacheGet
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -21,6 +24,16 @@ import java.net.URL
 import java.util.concurrent.TimeUnit
 
 class LoginFragment :Fragment(){
+
+
+    private var token : String? = null
+
+    val builder = Retrofit.Builder()
+        .baseUrl("https://temalabor2019.azurewebsites.net/api/auth/")
+        .addConverterFactory(GsonConverterFactory.create())
+
+    val retrofit = builder.build()
+    val userClient = retrofit.create(UserClient::class.java)
 
 
     private var btnEnableUser = false
@@ -57,17 +70,21 @@ class LoginFragment :Fragment(){
             val passwordString = password.text.toString().trim()
             //login backend elérése
             if (usernameString.isNotEmpty() and passwordString.isNotEmpty()){
-                MyAsyncLogIn(usernameString,passwordString){result ->
+                //Működik, de nem ad vissza adatot
+                /*MyAsyncLogIn(usernameString,passwordString){result ->
                     /*if (result.toInt() != 302){
                         throw Exception("Unauthorized")
                     }*/
                     Toast.makeText(context,result,Toast.LENGTH_LONG).show()
-                }.execute()
+                }.execute()*/
 
-
+                //Adat lekérdezése lenne, de úgy látja hogy nem jelentkeztem még be
                 /*MyAsyncGetUserData{result ->
                     Toast.makeText(context,result,Toast.LENGTH_LONG).show()
                 }.execute()*/
+
+
+
             }
         }
     }
