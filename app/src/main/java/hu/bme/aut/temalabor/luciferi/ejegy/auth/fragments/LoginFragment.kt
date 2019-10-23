@@ -9,33 +9,23 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.afterTextChanged
-import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.UserClient
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.User
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitApi
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient.api
 import kotlinx.android.synthetic.main.fragment_login.*
 import okhttp3.*
-import okhttp3.internal.cacheGet
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStream
 import java.io.InputStreamReader
+import java.net.CookieManager
+import java.net.CookiePolicy
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
 class LoginFragment :Fragment(){
-
-
-    private var token : String? = null
-
-    val builder = Retrofit.Builder()
-        .baseUrl("https://temalabor2019.azurewebsites.net/api/auth/")
-        .addConverterFactory(GsonConverterFactory.create())
-
-    val retrofit = builder.build()
-    val userClient = retrofit.create(UserClient::class.java)
-
-
     private var btnEnableUser = false
     private var btnEnablePwd = false
 
@@ -70,135 +60,25 @@ class LoginFragment :Fragment(){
             val passwordString = password.text.toString().trim()
             //login backend elérése
             if (usernameString.isNotEmpty() and passwordString.isNotEmpty()){
-                //Működik, de nem ad vissza adatot
-                /*MyAsyncLogIn(usernameString,passwordString){result ->
-                    /*if (result.toInt() != 302){
-                        throw Exception("Unauthorized")
-                    }*/
-                    Toast.makeText(context,result,Toast.LENGTH_LONG).show()
-                }.execute()*/
-
-                //Adat lekérdezése lenne, de úgy látja hogy nem jelentkeztem még be
-                /*MyAsyncGetUserData{result ->
-                    Toast.makeText(context,result,Toast.LENGTH_LONG).show()
-                }.execute()*/
-
-
-
+                //do something
+                MyAsyncLogin(usernameString,passwordString){user ->
+                    Toast.makeText(context,"Curent user data:\n${user.toString()}",Toast.LENGTH_LONG).show()
+                }.execute()
             }
         }
     }
 
+    private class MyAsyncLogin(val username : String,val  password : String, val callback : (User?) -> Unit) : AsyncTask<String, Unit, User?>(){
+        override fun doInBackground(vararg p0: String?): User? {
+            val callSyncLoginUser = api.loginUser(username,password)
 
-}
-
-private class MyAsyncLogIn(val username : String,val  password : String, val callback : (String) -> Unit) : AsyncTask<String, Unit, String>(){
-    override fun doInBackground(vararg p0: String): String {
-
-        var reader : BufferedReader? = null
-        var result : String = ""
-        try {
-            val url = URL("https://temalabor2019.azurewebsites.net/api/auth/login")
-            val conn = url.openConnection() as HttpURLConnection
-            conn.apply {
-                requestMethod = "POST"
-
-                //addRequestProperty("Content-Type","application/json; utf-8")
-                //addRequestProperty("Accept","application/json")
-                doOutput = true
-                doInput = true
-
-                useCaches = false
-                outputStream.write("email=$username&password=$password".toByteArray())
-                outputStream.flush()
-
-
-
-                reader = BufferedReader(InputStreamReader(inputStream))
-            }
-
-            var line : String?
-            do {
-                line = reader?.readLine()
-                result += line
-            } while (line != null)
-
-            //val something = conn.headerFields
-            //return conn.responseCode.toString()
-            return result
-        } catch (e : IOException){
-            e.printStackTrace()
-        } finally {
-            if (reader != null) {
-                try {
-                    reader!!.close()
-                }catch (e: IOException){
-                    e.printStackTrace()
-                }
-            }
+            val response =callSyncLoginUser.execute()
+            return response.body()
         }
 
-
-
-
-
-/*
-        var result1 : String = ""
-
-        val client = OkHttpClient.Builder()
-            .connectTimeout(5000,TimeUnit.MILLISECONDS)
-            .authenticator(object : Authenticator{
-                override fun authenticate(route: Route?, response: Response): Request? {
-                    result1 = response.headers.toString()
-                    val credential = Credentials.basic(username,password)
-                    if (credential.equals(response.request.header("Authorization")))
-                        return null
-                    return response.request.newBuilder()
-                        .header("Authorization",credential)
-                        .build()
-                }
-            })
-            .build()
-        val request = Request.Builder()
-            .url("https://temalabor2019.azurewebsites.net/api/auth/login")
-            .build()
-        var response : Response? = null
-        try {
-            response = client.newCall(request).execute()
-            val requestPrev = response.request
-            return "Response1:\n" + result1 + "\nRequest2:\n" + requestPrev.headers.toString() + "\nResponse2:\n" + response.body.toString()
-        } catch (e : IOException){
-            e.printStackTrace()
-        }*/
-
-        return "ERROR"
-    }
-
-    override fun onPostExecute(result: String) {
-        super.onPostExecute(result)
-        callback.invoke(result)
-    }
-}
-
-private class MyAsyncGetUserData(val callback : (String) -> Unit) : AsyncTask<String, Unit, String>(){
-    override fun doInBackground(vararg p0: String): String {
-
-        val client=OkHttpClient.Builder()
-            .connectTimeout(5000,TimeUnit.MILLISECONDS)
-            .build()
-        val request=Request.Builder()
-            .url(
-                "https://temalabor2019.azurewebsites.net/api/user")
-            .get()
-            .build()
-        val call=client.newCall(request)
-        val response=call.execute()
-        val responseStr=response.body!!.string()
-        return responseStr
-    }
-
-    override fun onPostExecute(result: String) {
-        super.onPostExecute(result)
-        callback.invoke(result)
+        override fun onPostExecute(result: User?) {
+            super.onPostExecute(result)
+            callback.invoke(result)
+        }
     }
 }
