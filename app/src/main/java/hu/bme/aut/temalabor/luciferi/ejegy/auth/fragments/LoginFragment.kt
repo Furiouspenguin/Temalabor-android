@@ -47,6 +47,10 @@ class LoginFragment :Fragment(){
             if (btnEnableUser and btnEnablePwd) login.isEnabled = true
         }
 
+        sign_up_text.setOnClickListener {
+            listener?.registerNow()
+        }
+
         login.setOnClickListener {
             val usernameString = username.text.toString().trim()
             val passwordString = password.text.toString().trim()
@@ -73,10 +77,6 @@ class LoginFragment :Fragment(){
     override fun onDetach() {
         super.onDetach()
         listener = null
-    }
-
-    fun signUp(v : View){
-        listener?.registerNow()
     }
 
     private class MyAsyncLogin(val username : String,val  password : String, val callback : (UserData?) -> Unit) : AsyncTask<String, Unit, UserData?>(){

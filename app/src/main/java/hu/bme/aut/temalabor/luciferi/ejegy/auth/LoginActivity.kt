@@ -19,7 +19,15 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 
 
-class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener {
+class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener {
+    override fun loginNow() {
+        onBackPressed()
+    }
+
+    override fun registerSuccess() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun registerNow() {
         supportFragmentManager
             .beginTransaction()

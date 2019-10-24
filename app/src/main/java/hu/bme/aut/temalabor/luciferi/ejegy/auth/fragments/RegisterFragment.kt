@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import hu.bme.aut.temalabor.luciferi.ejegy.R
+import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment(){
 
@@ -18,6 +19,13 @@ class RegisterFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_register, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        sign_in_text.setOnClickListener {
+            listener?.loginNow()
+        }
     }
 
 
