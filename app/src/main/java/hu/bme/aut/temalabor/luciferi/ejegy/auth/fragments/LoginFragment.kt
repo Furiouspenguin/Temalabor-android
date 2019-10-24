@@ -1,5 +1,6 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments
 
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,25 +10,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.afterTextChanged
-import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.User
-import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitApi
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient.api
 import kotlinx.android.synthetic.main.fragment_login.*
-import okhttp3.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.net.CookieManager
-import java.net.CookiePolicy
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.concurrent.TimeUnit
 
 class LoginFragment :Fragment(){
     private var btnEnableUser = false
     private var btnEnablePwd = false
+
+    private var listener: OnFragmentInteractionListener? = null
+    private var userData : UserData? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_login, container, false)
@@ -63,22 +55,46 @@ class LoginFragment :Fragment(){
                 //do something
                 MyAsyncLogin(usernameString,passwordString){user ->
                     Toast.makeText(context,"Curent user data:\n${user.toString()}",Toast.LENGTH_LONG).show()
+                    userData = user
                 }.execute()
             }
         }
     }
 
-    private class MyAsyncLogin(val username : String,val  password : String, val callback : (User?) -> Unit) : AsyncTask<String, Unit, User?>(){
-        override fun doInBackground(vararg p0: String?): User? {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+    fun signUp(v : View){
+        listener?.registerNow()
+    }
+
+    private class MyAsyncLogin(val username : String,val  password : String, val callback : (UserData?) -> Unit) : AsyncTask<String, Unit, UserData?>(){
+        override fun doInBackground(vararg p0: String?): UserData? {
             val callSyncLoginUser = api.loginUser(username,password)
 
             val response =callSyncLoginUser.execute()
             return response.body()
         }
 
-        override fun onPostExecute(result: User?) {
+        override fun onPostExecute(result: UserData?) {
             super.onPostExecute(result)
             callback.invoke(result)
         }
+    }
+
+    interface OnFragmentInteractionListener{
+        fun registerNow()
+        fun loginSuccess(userData : UserData)
     }
 }

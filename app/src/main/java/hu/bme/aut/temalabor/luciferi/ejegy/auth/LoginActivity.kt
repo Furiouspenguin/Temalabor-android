@@ -1,37 +1,54 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.auth
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.Toast
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.LoginFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.RegisterFragment
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.MainActivity
 import hu.bme.aut.temalabor.luciferi.ejegy.room.AppDatabase
 import hu.bme.aut.temalabor.luciferi.ejegy.room.User
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
+import org.jetbrains.anko.startActivity
 
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var db : AppDatabase
-    private var emptyUserList : Boolean = true
+class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener {
+    override fun registerNow() {
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .add(R.id.login_fragment,RegisterFragment())
+            .commit()
+    }
+
+    override fun loginSuccess(userData : UserData) {
+        //hagyományosan
+        /*val intent = Intent(this,MainActivity::class.java)
+        intent.putExtra("id",userData.id)
+        intent.putExtra("email",userData.email)
+        intent.putExtra("name",userData.name)
+        intent.putExtra("idCard",userData.idCard)
+        intent.putExtra("type",userData.type)
+        startActivity(intent)*/
+        //jetbrains anko használatával:
+        startActivity<MainActivity>(
+            "id" to userData.id,
+            "email" to userData.email,
+            "name" to userData.name,
+            "idCard" to userData.idCard,
+            "type" to userData.type)
+        finish()
+    }
+
+    //private lateinit var db : AppDatabase
+    //private var emptyUserList : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +60,6 @@ class LoginActivity : AppCompatActivity() {
             .addToBackStack(null)
             .add(R.id.login_fragment,LoginFragment())
             .commit()
-
-
-
-
-
 
 
         //Room adatkezelés
@@ -87,7 +99,7 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 }
 
 
-private class AsyncGetDataFromRoom(val db : AppDatabase, val callback : (User) -> Unit) : AsyncTask<User, Unit, User>() {
+/*private class AsyncGetDataFromRoom(val db : AppDatabase, val callback : (User) -> Unit) : AsyncTask<User, Unit, User>() {
     override fun doInBackground(vararg params: User): User {
         val previousUsers = db.userDao().getAll()
         if (previousUsers.isNotEmpty()) {
@@ -100,7 +112,4 @@ private class AsyncGetDataFromRoom(val db : AppDatabase, val callback : (User) -
         super.onPostExecute(result)
         callback.invoke(result)
     }
-}
-
-
-
+}*/

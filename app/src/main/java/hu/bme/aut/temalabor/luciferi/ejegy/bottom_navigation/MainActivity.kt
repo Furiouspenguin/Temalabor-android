@@ -8,8 +8,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.temalabor.luciferi.ejegy.R
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
+
+    var userData : UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,5 +31,17 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        try {
+            userData = UserData(
+                intent.getStringExtra("id"),
+                intent.getStringExtra("email"),
+                intent.getStringExtra("name"),
+                intent.getStringExtra("idCard"),
+                intent.getStringExtra("type"))
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
     }
 }

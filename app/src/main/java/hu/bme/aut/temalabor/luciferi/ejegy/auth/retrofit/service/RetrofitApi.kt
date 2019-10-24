@@ -1,7 +1,7 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service
 
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.Line
-import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.User
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import okhttp3.Response
 import retrofit2.Call
 import retrofit2.http.*
@@ -24,7 +24,7 @@ interface RetrofitApi {
     fun loginUser(
         @Field("email") email : String,
         @Field("password") password : String
-    ) : Call<User>
+    ) : Call<UserData>
 
     @POST("/auth/logout")
     @FormUrlEncoded
@@ -38,10 +38,10 @@ interface RetrofitApi {
     ) : Call<Response>
 
     @GET("/user")
-    fun getUser() : Call<User>
+    fun getUser() : Call<UserData>
 
     @GET("/user/{userId}")
-    fun getUser(@Path("userId") userId : String) : Call<User>
+    fun getUser(@Path("userId") userId : String) : Call<UserData>
 
     /*
     postUser(userId)
@@ -50,7 +50,7 @@ interface RetrofitApi {
      */
 
     @GET("/users")
-    fun getUsers() : Call<List<User>>
+    fun getUsers() : Call<List<UserData>>
 
     /*
     postTicket()
