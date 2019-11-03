@@ -25,4 +25,5 @@
     <string name="prompt_password_confirm">Confirm password</string>
     <string name="sign_in_text">Sign in!</string>
     <string name="login_now_text">Do you already have an account?</string>
+    <string name="id_number">ID number</string>
 </resources>

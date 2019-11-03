@@ -41,10 +41,31 @@
 
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/idNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/rounded_corners_primary"
+            android:hint="@string/id_number"
+            android:inputType="numberDecimal"
+            android:padding="10dp"
+            android:selectAllOnFocus="true"
+
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <EditText
             android:id="@+id/password"
@@ -58,7 +79,7 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
 
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
@@ -67,7 +88,7 @@
             android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
+            app:layout_constraintTop_toBottomOf="@+id/idNumber" />
 
         <EditText
             android:id="@+id/password_confirm"
@@ -81,7 +102,7 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
 
             android:hint="@string/prompt_password_confirm"
             android:imeActionLabel="@string/action_sign_in_short"
@@ -103,7 +124,7 @@
 
             android:text="@string/sign_up"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="20sp"
 
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"

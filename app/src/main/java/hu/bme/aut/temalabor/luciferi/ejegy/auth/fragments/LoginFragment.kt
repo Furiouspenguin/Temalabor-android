@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.afterTextChanged
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient.api
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.jetbrains.anko.support.v4.longToast
 
 class LoginFragment :Fragment(){
     private var btnEnableUser = false
@@ -30,7 +32,7 @@ class LoginFragment :Fragment(){
 
         username.afterTextChanged { text ->
             if (text.isEmpty()){
-                username.error = "Need email"
+                username.error = "Need email!"
                 username.requestFocus()
                 btnEnableUser = false
                 login.isEnabled = false
@@ -39,7 +41,7 @@ class LoginFragment :Fragment(){
         }
         password.afterTextChanged { text ->
             if (text.isEmpty()){
-                password.error = "Need password"
+                password.error = "Need password!"
                 password.requestFocus()
                 btnEnablePwd = false
                 login.isEnabled = false
@@ -57,9 +59,14 @@ class LoginFragment :Fragment(){
             //login backend elérése
             if (usernameString.isNotEmpty() and passwordString.isNotEmpty()){
                 //do something
-                MyAsyncLogin(usernameString,passwordString){user ->
-                    Toast.makeText(context,"Curent user data:\n${user.toString()}",Toast.LENGTH_LONG).show()
+                RetrofitClient.MyAsyncLogin(usernameString, passwordString) { user ->
+                    longToast("Curent user data:\n${user.toString()}")
                     userData = user
+                    if (user != null){
+                        listener?.loginSuccess(user)
+                    } else {
+                        longToast("Coulnd't fetch data!")
+                    }
                 }.execute()
             }
         }
@@ -79,19 +86,6 @@ class LoginFragment :Fragment(){
         listener = null
     }
 
-    private class MyAsyncLogin(val username : String,val  password : String, val callback : (UserData?) -> Unit) : AsyncTask<String, Unit, UserData?>(){
-        override fun doInBackground(vararg p0: String?): UserData? {
-            val callSyncLoginUser = api.loginUser(username,password)
-
-            val response =callSyncLoginUser.execute()
-            return response.body()
-        }
-
-        override fun onPostExecute(result: UserData?) {
-            super.onPostExecute(result)
-            callback.invoke(result)
-        }
-    }
 
     interface OnFragmentInteractionListener{
         fun registerNow()

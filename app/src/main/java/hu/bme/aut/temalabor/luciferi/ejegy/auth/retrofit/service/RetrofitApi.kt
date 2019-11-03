@@ -1,7 +1,7 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service
 
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.*
-import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,12 +12,12 @@ interface RetrofitApi {
     @POST("/auth/register")
     @FormUrlEncoded
     fun register(
-        @Field("name") name : String,
+        @Field("name") name : String = "Anonymus",
         @Field("email") email : String,
         @Field("idCard") idCard : String,
         @Field("password") password : String,
         @Field("type") type : String = "user"
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     //TESZTELVE, JÓ!
     @POST("/auth/login")
@@ -29,14 +29,14 @@ interface RetrofitApi {
 
     @POST("/auth/logout")
     @FormUrlEncoded
-    fun logout() : Call<Response>
+    fun logout() : Call<ResponseBody>
 
     @POST("/auth/password")
     @FormUrlEncoded
     fun postPassword(
         @Field("oldPassword") oldPassword : String,
         @Field("newPassword") newPassword : String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     ////////////////////////////////////
 
@@ -54,10 +54,10 @@ interface RetrofitApi {
         @Path("userId") userId: String,
         @Field("name") name: String,
         @Field("idCard") idCard: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @DELETE("/user/{userId}")
-    fun deleteUser(@Path("userId") userId : String) : Call<Response>
+    fun deleteUser(@Path("userId") userId : String) : Call<ResponseBody>
 
     @GET("/user/{userId}/tickets")
     fun getUserTickets(@Path("userId") userId : String) : Call<List<UserTicket>>
@@ -77,7 +77,7 @@ interface RetrofitApi {
         @Field("validTimeUnit") validTimeUnit: String,
         @Field("price") price : Int,
         @Field("line") lineId: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @GET("/ticket/{ticketId}")
     fun getTicket(@Path("ticketId") ticketId : String) : Call<TicketTypeWithPrice>
@@ -91,10 +91,10 @@ interface RetrofitApi {
         @Field("validTimeUnit") validTimeUnit: String,
         @Field("price") price : Int,
         @Field("line") lineId: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @DELETE("/ticket/{ticketId}")
-    fun deleteTicket(@Path("ticketId") ticketId : String) : Call<Response>
+    fun deleteTicket(@Path("ticketId") ticketId : String) : Call<ResponseBody>
 
     @GET("/ticket/{ticketId}/expiry")
     fun getTicketExpiry(@Path("ticketId") ticketId : String) : Call<TicketTypeWithPrice>
@@ -114,11 +114,11 @@ interface RetrofitApi {
     fun postTicketsBuy(
         @Field("typeId") typeId: String,
         @Field("fromDate") fromDate: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @POST("/tickets/validate")
     @FormUrlEncoded
-    fun postTicketsValidate(@Field("id") ticketId: String) : Call<Response>
+    fun postTicketsValidate(@Field("id") ticketId: String) : Call<ResponseBody>
 
 
     @POST("/tickets/inspect")
@@ -134,7 +134,7 @@ interface RetrofitApi {
     fun postLine(
         @Field("name") name: String,
         @Field("type") type: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @GET("/line/{lineId}")
     fun getLine(@Path("lineId") lineId : String) : Call<Line>
@@ -146,10 +146,10 @@ interface RetrofitApi {
         @Path("lineId") lineId: String,
         @Field("name") name: String,
         @Field("type") type: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @DELETE("/line/{lineId}")
-    fun deleteLine(@Path("lineId") lineId: String) : Call<Response>
+    fun deleteLine(@Path("lineId") lineId: String) : Call<ResponseBody>
 
     @GET("/lines")
     fun getLines(): Call<List<Line>>
@@ -165,7 +165,7 @@ interface RetrofitApi {
         @Field("type") type: String,
         @Field("licencePlate") licencePlate: String,
         @Field("line") line: String //id of the line!
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @GET("/vehicle/{vehicleId}")
     fun getVehicle(@Path("vehicleId") vehicleId : String) : Call<Vehicle>
@@ -178,10 +178,10 @@ interface RetrofitApi {
         @Field("type") type: String,
         @Field("licencePlate") licencePlate: String,
         @Field("line") lineId: String
-    ) : Call<Response>
+    ) : Call<ResponseBody>
 
     @DELETE("/vehicle/{vehicleId}")
-    fun deleteVehicle(@Path("vehicleId") vehicleId : String) : Call<Response>
+    fun deleteVehicle(@Path("vehicleId") vehicleId : String) : Call<ResponseBody>
 
     @GET("/vehicles")
     fun getVehicles() : Call<List<Vehicle>>

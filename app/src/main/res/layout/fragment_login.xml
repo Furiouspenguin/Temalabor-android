@@ -41,7 +41,7 @@
 
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -58,7 +58,7 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
 
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
@@ -80,7 +80,7 @@
 
             android:text="@string/sign_in"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="20sp"
 
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"

@@ -1,5 +1,7 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service
 
+import android.os.AsyncTask
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
@@ -36,4 +38,18 @@ object RetrofitClient {
         .build()
 
     val api: RetrofitApi = retrofit.create(RetrofitApi::class.java)
+
+    class MyAsyncLogin(val username : String,val  password : String, val callback : (UserData?) -> Unit) : AsyncTask<String, Unit, UserData?>(){
+        override fun doInBackground(vararg p0: String?): UserData? {
+            val callSyncLoginUser = api.loginUser(username,password)
+
+            val response =callSyncLoginUser.execute()
+            return response.body()
+        }
+
+        override fun onPostExecute(result: UserData?) {
+            super.onPostExecute(result)
+            callback.invoke(result)
+        }
+    }
 }

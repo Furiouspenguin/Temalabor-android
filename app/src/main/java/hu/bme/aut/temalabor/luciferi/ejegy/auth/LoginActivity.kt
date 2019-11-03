@@ -24,8 +24,14 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
         onBackPressed()
     }
 
-    override fun registerSuccess() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun registerSuccess(userData : UserData) {
+        startActivity<MainActivity>(
+            "id" to userData.id,
+            "email" to userData.email,
+            "name" to userData.name,
+            "idCard" to userData.idCard,
+            "type" to userData.type)
+        finish()
     }
 
     override fun registerNow() {
