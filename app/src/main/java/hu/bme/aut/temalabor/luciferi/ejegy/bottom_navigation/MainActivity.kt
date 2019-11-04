@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
+import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
+import org.jetbrains.anko.longToast
 import java.lang.Exception
 
 
@@ -37,8 +39,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-
+        userData = RestApiRepository.getUserData().value
+        longToast(userData.toString())
+/*
         try {
             userData = UserData(
                 intent.getStringExtra("id"),
@@ -49,6 +52,6 @@ class MainActivity : AppCompatActivity() {
         }catch (e : Exception){
             e.printStackTrace()
         }
-
+*/
     }
 }

@@ -26,4 +26,9 @@
     <string name="sign_in_text">Sign in!</string>
     <string name="login_now_text">Do you already have an account?</string>
     <string name="id_number">ID number</string>
+    <string name="unknown">Unknown</string>
+    <string name="type">type</string>
+    <string name="end_of_validity">End of validity:</string>
+    <string name="date">date</string>
+    <string name="tap_to_expand">Tap to expand</string>
 </resources>

@@ -3,9 +3,9 @@ package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.IDPagerFragment
+import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.idpager.IDPagerFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.OtherPager
-import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.ValidTicketsPagerFragment
+import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.ValidTicketsPagerFragment
 import java.lang.IllegalArgumentException
 
 class HomePagerAdapter(manager : FragmentManager) : FragmentStatePagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){

@@ -13,6 +13,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.LoginFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.RegisterFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.MainActivity
+import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import hu.bme.aut.temalabor.luciferi.ejegy.room.AppDatabase
 import hu.bme.aut.temalabor.luciferi.ejegy.room.User
 import kotlinx.android.synthetic.main.activity_login.*
@@ -51,13 +52,19 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
         intent.putExtra("idCard",userData.idCard)
         intent.putExtra("type",userData.type)
         startActivity(intent)*/
+
+        //SET THE DATA IN THE REPOSITORY
+        RestApiRepository.setUserData(userData)
+        /*
         //jetbrains anko használatával:
         startActivity<MainActivity>(
             "id" to userData.id,
             "email" to userData.email,
             "name" to userData.name,
             "idCard" to userData.idCard,
-            "type" to userData.type)
+            "type" to userData.type)*/
+        //startActivity<MainActivity>()
+        startActivity(Intent(this,MainActivity::class.java))
         finish()
     }
 

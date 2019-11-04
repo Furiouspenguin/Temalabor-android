@@ -2,6 +2,7 @@ package hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service
 
 import android.os.AsyncTask
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
@@ -48,6 +49,20 @@ object RetrofitClient {
         }
 
         override fun onPostExecute(result: UserData?) {
+            super.onPostExecute(result)
+            callback.invoke(result)
+        }
+    }
+
+    class MyAsyncGetUserTickets(val userId : String, val callback : (List<UserTicket>) -> Unit) : AsyncTask<String, Unit, List<UserTicket>>(){
+        override fun doInBackground(vararg p0: String?): List<UserTicket> {
+            val callSyncGetUserTickets = api.getUserTickets(userId)
+
+            val response =callSyncGetUserTickets.execute()
+            return response.body()!!
+        }
+
+        override fun onPostExecute(result: List<UserTicket>) {
             super.onPostExecute(result)
             callback.invoke(result)
         }

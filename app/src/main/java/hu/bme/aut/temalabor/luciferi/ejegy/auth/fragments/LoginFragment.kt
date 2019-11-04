@@ -61,7 +61,7 @@ class LoginFragment :Fragment(){
             if (usernameString.isNotEmpty() and passwordString.isNotEmpty()){
                 //do something
                 RetrofitClient.MyAsyncLogin(usernameString, passwordString) { user ->
-                    longToast("Curent user data:\n${user.toString()}")
+                    //longToast("Curent user data:\n${user.toString()}")
                     userData = user
                     if (user != null){
                         listener?.loginSuccess(user)
