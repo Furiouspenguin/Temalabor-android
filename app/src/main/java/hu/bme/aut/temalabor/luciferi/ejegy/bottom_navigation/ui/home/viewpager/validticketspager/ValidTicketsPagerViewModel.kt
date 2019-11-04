@@ -15,5 +15,4 @@ class ValidTicketsPagerViewModel : ViewModel(){
         }
     }
     var tickets : LiveData<List<UserTicket>>? = _tickets
-
 }

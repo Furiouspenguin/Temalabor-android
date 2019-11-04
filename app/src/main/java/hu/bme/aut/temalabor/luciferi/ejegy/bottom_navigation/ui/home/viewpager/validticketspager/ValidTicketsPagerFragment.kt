@@ -59,6 +59,7 @@ class ValidTicketsPagerFragment : Fragment(){
             it.forEach {
                 adapter.addTicket(it)
             }
+            RestApiRepository.setUserTickets(it)
         }.execute()
     }
 }

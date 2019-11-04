@@ -3,6 +3,7 @@ package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
@@ -24,9 +25,24 @@ class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter
         holder.dateTextView.text = ticket.validUntil
     }
 
+
+    interface OnItemClickListener {
+        fun onItemClick(ticket: UserTicket)
+    }
+
+    private var listener : OnItemClickListener? = null
+
     inner class MyViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         val typeTextView = itemView.findViewById<TextView>(R.id.type)
         val dateTextView = itemView.findViewById<TextView>(R.id.date)
+
+        init {
+            itemview.setOnClickListener {
+                if (listener != null && (adapterPosition != RecyclerView.NO_POSITION)){
+                    listener!!.onItemClick(tickets[adapterPosition])
+                }
+            }
+        }
     }
 
 
@@ -34,6 +50,7 @@ class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter
         ticket ?: return
 
         tickets.add(ticket)
+
         notifyDataSetChanged()
     }
 }

@@ -26,12 +26,14 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
     }
 
     override fun registerSuccess(userData : UserData) {
-        startActivity<MainActivity>(
+        /*startActivity<MainActivity>(
             "id" to userData.id,
             "email" to userData.email,
             "name" to userData.name,
             "idCard" to userData.idCard,
-            "type" to userData.type)
+            "type" to userData.type)*/
+        RestApiRepository.setUserData(userData)
+        startActivity(Intent(this,MainActivity::class.java))
         finish()
     }
 
