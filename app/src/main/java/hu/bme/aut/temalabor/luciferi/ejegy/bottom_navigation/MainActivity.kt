@@ -9,8 +9,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
-import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
+
+
+//TODO: REPOSITORY + LIVEDATA KELL!!!!!!!!!!
+
+//TODO: ez legyen az indító és ha ezen teszteljük hogy be vagyunk-e jelentkezve (getUser() hívás ha rossz, akkor loginra küld)
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,12 +30,14 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_store, R.id.navigation_notifications
             )
         )
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
 
         try {
             userData = UserData(

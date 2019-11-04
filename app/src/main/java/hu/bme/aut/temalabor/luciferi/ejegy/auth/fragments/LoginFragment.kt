@@ -14,6 +14,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient.api
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.jetbrains.anko.doAsyncResult
 import org.jetbrains.anko.support.v4.longToast
 
 class LoginFragment :Fragment(){

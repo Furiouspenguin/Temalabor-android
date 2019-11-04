@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_store"
+        android:name="hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.store.StoreFragment"
+        android:label="@string/title_store"
+        tools:layout="@layout/fragment_store" />
 
     <fragment
         android:id="@+id/navigation_notifications"
