@@ -19,11 +19,7 @@ object RestApiRepository {
     private var userTickets = ArrayList<UserTicket>()
 
     fun getUserTickets(userId : String) : MutableLiveData<List<UserTicket>> = MutableLiveData<List<UserTicket>>().apply {
-        if (userTickets.isEmpty()){
-            RetrofitClient.MyAsyncGetUserTickets(userId){
-                value = it
-            }.execute()
-        } else value = userTickets
+        value = userTickets
     }
 
     fun setUserTickets(tickets : List<UserTicket>){

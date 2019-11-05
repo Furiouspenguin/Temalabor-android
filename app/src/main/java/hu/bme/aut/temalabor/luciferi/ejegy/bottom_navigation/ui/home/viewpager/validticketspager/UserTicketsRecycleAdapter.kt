@@ -22,12 +22,12 @@ class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ticket = tickets[position]
         holder.typeTextView.text = ticket.ticketType.name
-        holder.dateTextView.text = ticket.validUntil
+        holder.dateTextView.text = ticket.validUntil.subSequence(0,10)
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(ticket: UserTicket)
+        fun onItemClick(ticketPosition: Int)
     }
 
     private var listener : OnItemClickListener? = null
@@ -39,10 +39,14 @@ class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter
         init {
             itemview.setOnClickListener {
                 if (listener != null && (adapterPosition != RecyclerView.NO_POSITION)){
-                    listener!!.onItemClick(tickets[adapterPosition])
+                    listener!!.onItemClick(adapterPosition)
                 }
             }
         }
+    }
+
+    fun setOnItemCickListener(listener : OnItemClickListener){
+        this.listener = listener
     }
 
 
