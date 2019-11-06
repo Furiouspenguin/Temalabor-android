@@ -5,6 +5,8 @@ import android.os.Bundle
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
+import kotlinx.android.synthetic.main.activity_user_ticket.*
+import net.glxn.qrgen.android.QRCode
 import org.jetbrains.anko.longToast
 import java.lang.Exception
 
@@ -21,6 +23,13 @@ class UserTicketActivity : AppCompatActivity() {
         } catch (e : Exception) {
             e.printStackTrace()
         }
-        longToast(ticket.validUntil)
+        //longToast(ticket.validUntil)
+        title = ticket.ticketType.name
+        ticket_id_number.text = ticket.ticketType.typeId
+        ticket_valid_from.text = ticket.validFrom.subSequence(0,10)
+        ticket_valid_until.text = ticket.validUntil.subSequence(0,10)
+
+        val myBitmap = QRCode.from(ticket.id).withSize(500,500).bitmap()
+        ticket_qr.setImageBitmap(myBitmap)
     }
 }

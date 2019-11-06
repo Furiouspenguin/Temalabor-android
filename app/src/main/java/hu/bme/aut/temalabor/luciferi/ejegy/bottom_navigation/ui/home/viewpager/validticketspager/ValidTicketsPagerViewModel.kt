@@ -13,13 +13,15 @@ class ValidTicketsPagerViewModel : ViewModel(){
     init {
         if (_tickets == null) {
             _tickets = RestApiRepository.getUserTickets(RestApiRepository.getUserData().value!!.id)
-            if (_tickets == null) {
+
+            if (_tickets == null || _tickets?.value.isNullOrEmpty()) {
                 RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){
                     _tickets = MutableLiveData(it)
 
                     RestApiRepository.setUserTickets(it)
                 }.execute()
             }
+
         }
     }
     var tickets : LiveData<List<UserTicket>>? = _tickets

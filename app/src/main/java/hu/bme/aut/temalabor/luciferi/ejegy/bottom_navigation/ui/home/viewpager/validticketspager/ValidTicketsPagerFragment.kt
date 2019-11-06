@@ -32,7 +32,6 @@ class ValidTicketsPagerFragment : Fragment(){
         return inflater.inflate(R.layout.fragment_pager_validtickets,container,false)
     }
 
-    //TODO: userTickets itt (RECYCLEVIEW!!!)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,17 +52,21 @@ class ValidTicketsPagerFragment : Fragment(){
                 adapter.addTicket(it)
             }
             adapter.notifyDataSetChanged()
+
+            longToast("Got data")
         })
+/*
+        if (tickets.isEmpty()){
+            RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){
+                tickets = ArrayList(it)
+                //tickets.sortWith(compareBy { it.validUntil })
+                tickets.forEach {
+                    adapter.addTicket(it)
+                }
+                RestApiRepository.setUserTickets(it)
+            }.execute()
+        }*/
 
-
-        RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){
-            tickets = ArrayList(it)
-            //tickets.sortWith(compareBy { it.validUntil })
-            tickets.forEach {
-                adapter.addTicket(it)
-            }
-            RestApiRepository.setUserTickets(it)
-        }.execute()
 
         adapter.setOnItemCickListener(object : UserTicketsRecycleAdapter.OnItemClickListener{
             override fun onItemClick(ticketPosition: Int) {

@@ -26,7 +26,11 @@ object RestApiRepository {
         userTickets = ArrayList(tickets)
     }
 
-
+    fun setUserTicketsFromApi(){
+        RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){
+            setUserTickets(it)
+        }.execute()
+    }
 
 
 

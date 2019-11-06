@@ -31,4 +31,7 @@
     <string name="end_of_validity">End of validity:</string>
     <string name="date">date</string>
     <string name="tap_to_expand">Tap to expand</string>
+    <string name="dotted_line_divider">dotted line divider</string>
+    <string name="qr_code">qr code</string>
+    <string name="valid_from">Valid from</string>
 </resources>
