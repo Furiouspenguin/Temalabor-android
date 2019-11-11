@@ -12,6 +12,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.afterTextChanged
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient.api
+import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.username
 import okhttp3.Response
@@ -90,18 +91,16 @@ class RegisterFragment : Fragment(){
             val passwordString = password.text.toString().trim()
             val idNumberString = idNumber.text.toString().trim()
             if (usernameString.isNotEmpty() and passwordString.isNotEmpty() and idNumberString.isNotEmpty()) {
-                MyAsyncRegister(usernameString,passwordString,idNumberString){
-                    if (it){
-                        RetrofitClient.MyAsyncLogin(usernameString, passwordString) { user ->
-                            longToast("Curent user data:\n${user.toString()}")
-                            userData = user
-                            if (user != null){
-                                listener?.registerSuccess(user)
-                            } else {
-                                longToast("Coulnd't fetch data!")
-                            }
-                        }.execute()
-                    } else longToast("Couldn't register")
+                MyAsyncRegister(usernameString,passwordString,idNumberString){user->
+                    userData = user
+                    if (user != null){
+                        //adatok elmentése
+                        RestApiRepository.setUserData(user)
+                        //activity értesítése a sikeres regisztrációról
+                        listener?.registerSuccess(user)
+                    } else {
+                        longToast("Coulnd't fetch data!")
+                    }
                 }.execute()
             }
         }
@@ -129,14 +128,14 @@ class RegisterFragment : Fragment(){
             val username : String,
             val password : String,
             val idNumber : String,
-            val callback : (Boolean) -> Unit
-    ) : AsyncTask<String,Unit, Boolean>(){
-        override fun doInBackground(vararg params: String?): Boolean {
+            val callback : (UserData?) -> Unit
+    ) : AsyncTask<String,Unit, UserData?>(){
+        override fun doInBackground(vararg params: String?): UserData? {
             val callSyncRegister = api.register(email = username, password = password, idCard = idNumber)
             val response =callSyncRegister.execute()
-            return response.isSuccessful
+            return response.body()
         }
-        override fun onPostExecute(result:Boolean) {
+        override fun onPostExecute(result:UserData?) {
             super.onPostExecute(result)
             callback.invoke(result)
         }

@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.idpager.IDPagerFragment
-import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.OtherPager
+import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.otherpager.OtherPagerFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.ValidTicketsPagerFragment
 import java.lang.IllegalArgumentException
 
@@ -18,7 +18,7 @@ class HomePagerAdapter(manager : FragmentManager) : FragmentStatePagerAdapter(ma
         return when(position){
             0 -> IDPagerFragment()
             1 -> ValidTicketsPagerFragment()
-            2 -> OtherPager()
+            2 -> OtherPagerFragment()
             else -> throw IllegalArgumentException("No such page!")
         }
     }

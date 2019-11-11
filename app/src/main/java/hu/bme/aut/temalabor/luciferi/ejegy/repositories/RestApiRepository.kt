@@ -13,25 +13,41 @@ object RestApiRepository {
 
     fun setUserData(userData: UserData){
         this.userData = userData
-    }
 
-
-    private var userTickets = ArrayList<UserTicket>()
-
-    fun getUserTickets(userId : String) : MutableLiveData<List<UserTicket>> = MutableLiveData<List<UserTicket>>().apply {
-        value = userTickets
-    }
-
-    fun setUserTickets(tickets : List<UserTicket>){
-        userTickets = ArrayList(tickets)
-    }
-
-    fun setUserTicketsFromApi(){
-        RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){
+        RetrofitClient.MyAsyncGetUserTickets(userData.id){
             setUserTickets(it)
         }.execute()
     }
 
 
+    private var userTickets = ArrayList<UserTicket>()
+    private var validUserTickets = ArrayList<UserTicket>()
+    private var invalidUserTickets = ArrayList<UserTicket>()
+
+    fun getUserTickets() : MutableLiveData<List<UserTicket>> =
+        MutableLiveData<List<UserTicket>>().apply { value = userTickets }
+
+    fun getValidUserTickets() : MutableLiveData<List<UserTicket>> =
+        MutableLiveData<List<UserTicket>>().apply { value = validUserTickets }
+
+    fun getInvalidUserTickets() : MutableLiveData<List<UserTicket>> =
+        MutableLiveData<List<UserTicket>>().apply { value = invalidUserTickets }
+
+    fun setUserTickets(tickets : List<UserTicket>){
+        userTickets = ArrayList(tickets)
+        userTickets.forEach {
+            if (it.validFrom.isNullOrEmpty() or it.validUntil.isNullOrEmpty()) {
+                invalidUserTickets.add(it)
+            } else {
+                validUserTickets.add(it)
+            }
+        }
+    }
+
+    fun setUserTicketsFromApi(){
+        RetrofitClient.MyAsyncGetUserTickets(userData!!.id){
+            setUserTickets(it)
+        }.execute()
+    }
 
 }

@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.notifications.NotificationsFragment"
+        android:name="hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.settings.SettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>

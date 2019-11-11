@@ -1,20 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="64dp">
+    tools:context=".bottom_navigation.ui.store.StoreCategoryActivity">
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/invalid_recyclerview"
+        android:layout_marginTop="16dp"
+        android:id="@+id/recyclerview_store_activity_tickets"
+        tools:listitem="@layout/ticket_store_activity_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/usertickets_listitem"
+        android:orientation="vertical"
         android:scrollbars="vertical"
-        android:background="@color/white"
-        />
+        android:background="@color/white" />
+
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager
+package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.otherpager
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,47 +11,46 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
+import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.UserTicketActivity
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.adapter.UserTicketsRecycleAdapter
-import kotlinx.android.synthetic.main.fragment_pager_validtickets.*
+import kotlinx.android.synthetic.main.fragment_pager_other.*
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.startActivity
 
-class ValidTicketsPagerFragment : Fragment(){
+class OtherPagerFragment : Fragment(){
 
-    private lateinit var validTicketsPagerViewModel: ValidTicketsPagerViewModel
+    private lateinit var otherPagerViewModel: OtherPagerViewModel
     private var tickets = ArrayList<UserTicket>()
 
-    private var validTickets = ArrayList<UserTicket>()
-    //private var invalidTickets = ArrayList<UserTicket>()
+    private var invalidTickets = ArrayList<UserTicket>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_pager_validtickets,container,false)
+        return inflater.inflate(R.layout.fragment_pager_other,container,false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        validTicketsPagerViewModel = ViewModelProviders.of(this).get(ValidTicketsPagerViewModel::class.java)
+        otherPagerViewModel = ViewModelProviders.of(this).get(OtherPagerViewModel::class.java)
 
 
 
-        recyclerview.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+        invalid_recyclerview.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
 
         val adapter =
             UserTicketsRecycleAdapter()
 
-        recyclerview.adapter = adapter
+        invalid_recyclerview.adapter = adapter
 
-        validTicketsPagerViewModel.tickets?.observe(this, Observer {usertickets->
+        otherPagerViewModel.tickets?.observe(this, Observer {usertickets->
 
             tickets=ArrayList(usertickets)
             tickets.forEach {
-                if (!it.validFrom.isNullOrEmpty() and !it.validUntil.isNullOrEmpty()) {
-                    validTickets.add(it)
+                if (it.validFrom.isNullOrEmpty() or it.validUntil.isNullOrEmpty()) {
+                    invalidTickets.add(it)
                     adapter.addTicket(it)
                 }
             }
@@ -76,7 +75,7 @@ class ValidTicketsPagerFragment : Fragment(){
             override fun onItemClick(ticketPosition: Int) {
                 startActivity<UserTicketActivity>(
                     "position" to ticketPosition,
-                    "valid" to true
+                    "valid" to false
                 )
             }
         })

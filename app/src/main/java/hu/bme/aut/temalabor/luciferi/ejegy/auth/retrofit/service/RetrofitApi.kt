@@ -17,7 +17,7 @@ interface RetrofitApi {
         @Field("idCard") idCard : String,
         @Field("password") password : String,
         @Field("type") type : String = "user"
-    ) : Call<ResponseBody>
+    ) : Call<UserData>
 
     //TESZTELVE, JÓ!
     @POST("/auth/login")

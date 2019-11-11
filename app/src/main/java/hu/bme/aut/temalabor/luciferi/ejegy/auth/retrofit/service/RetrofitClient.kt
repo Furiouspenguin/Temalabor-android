@@ -11,6 +11,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.CookieManager
 import java.net.CookiePolicy
+import com.google.gson.GsonBuilder
+import com.google.gson.Gson
+
+
 
 object RetrofitClient {
     private val cookieManager = CookieManager()
@@ -32,8 +36,9 @@ object RetrofitClient {
                 return cookies ?: ArrayList<Cookie>()
             }
         }).build()
+
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://temalabor2019-backend.azurewebsites.net/")
+        .baseUrl("https://temalabor2019-backend2.azurewebsites.net/")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

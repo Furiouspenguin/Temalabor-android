@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
             "name" to userData.name,
             "idCard" to userData.idCard,
             "type" to userData.type)*/
-        RestApiRepository.setUserData(userData)
+        //RestApiRepository.setUserData(userData)
         startActivity(Intent(this,MainActivity::class.java))
         finish()
     }
@@ -46,25 +46,9 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
     }
 
     override fun loginSuccess(userData : UserData) {
-        //hagyományosan
-        /*val intent = Intent(this,MainActivity::class.java)
-        intent.putExtra("id",userData.id)
-        intent.putExtra("email",userData.email)
-        intent.putExtra("name",userData.name)
-        intent.putExtra("idCard",userData.idCard)
-        intent.putExtra("type",userData.type)
-        startActivity(intent)*/
-
         //SET THE DATA IN THE REPOSITORY
-        RestApiRepository.setUserData(userData)
-        /*
-        //jetbrains anko használatával:
-        startActivity<MainActivity>(
-            "id" to userData.id,
-            "email" to userData.email,
-            "name" to userData.name,
-            "idCard" to userData.idCard,
-            "type" to userData.type)*/
+        //RestApiRepository.setUserData(userData)
+
         //startActivity<MainActivity>()
         startActivity(Intent(this,MainActivity::class.java))
         finish()

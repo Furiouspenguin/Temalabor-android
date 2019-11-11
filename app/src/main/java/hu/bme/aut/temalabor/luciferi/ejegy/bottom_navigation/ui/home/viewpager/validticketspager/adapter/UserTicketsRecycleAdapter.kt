@@ -1,16 +1,15 @@
-package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager
+package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 
 class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter.MyViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.usertickets_listitem,parent,false)
         return MyViewHolder(v)
@@ -23,9 +22,10 @@ class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ticket = tickets[position]
         holder.typeTextView.text = ticket.ticketType.name
-        holder.dateTextView.text = ticket.validUntil.subSequence(0,10)
+        if (!(ticket.validFrom.isNullOrEmpty() or ticket.validUntil.isNullOrEmpty())) {
+            holder.dateTextView.text = ticket.validUntil.subSequence(0,10)
+        }
     }
-
 
     interface OnItemClickListener {
         fun onItemClick(ticketPosition: Int)

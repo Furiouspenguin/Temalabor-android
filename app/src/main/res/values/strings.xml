@@ -34,4 +34,7 @@
     <string name="dotted_line_divider">dotted line divider</string>
     <string name="qr_code">qr code</string>
     <string name="valid_from">Valid from</string>
+    <string name="ticket_name">ticket name</string>
+    <string name="price">price</string>
+    <string name="category">Category</string>
 </resources>
