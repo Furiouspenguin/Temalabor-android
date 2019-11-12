@@ -47,6 +47,13 @@ object RestApiRepository {
     fun setUserTicketsFromApi(){
         RetrofitClient.MyAsyncGetUserTickets(userData!!.id){
             setUserTickets(it)
+            it.forEach {
+                if (it.validFrom.isNullOrEmpty() or it.validUntil.isNullOrEmpty()) {
+                    invalidUserTickets.add(it)
+                } else {
+                    validUserTickets.add(it)
+                }
+            }
         }.execute()
     }
 

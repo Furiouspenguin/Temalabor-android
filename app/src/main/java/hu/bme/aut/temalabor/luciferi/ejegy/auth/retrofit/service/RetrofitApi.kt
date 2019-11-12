@@ -111,9 +111,17 @@ interface RetrofitApi {
 
     @POST("/tickets/buy")
     @FormUrlEncoded
+    fun postTicketsBuyPassTicket(
+        @Field("typeId") typeId: String,
+        @Field("fromDate") fromDate: String,
+        @Field("count") count: Int = 1
+    ) : Call<ResponseBody>
+
+    @POST("/tickets/buy")
+    @FormUrlEncoded
     fun postTicketsBuy(
         @Field("typeId") typeId: String,
-        @Field("fromDate") fromDate: String
+        @Field("count") count: Int = 1
     ) : Call<ResponseBody>
 
     @POST("/tickets/validate")
