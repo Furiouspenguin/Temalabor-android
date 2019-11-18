@@ -17,21 +17,26 @@
         <activity android:name=".bottom_navigation.ui.home.viewpager.idpager.QRScannerActivity"></activity>
         <activity
             android:name=".bottom_navigation.ui.store.BuyTicketActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".bottom_navigation.ui.store.StoreCategoryActivity"
-            android:parentActivityName=".bottom_navigation.MainActivity" />
+            android:parentActivityName=".bottom_navigation.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".bottom_navigation.ui.home.viewpager.validticketspager.UserTicketActivity"
             android:parentActivityName=".bottom_navigation.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".bottom_navigation.MainActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".auth.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/generalnotitle">
+            android:theme="@style/generalnotitle"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
