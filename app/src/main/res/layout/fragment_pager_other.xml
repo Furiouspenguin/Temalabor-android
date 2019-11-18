@@ -12,7 +12,7 @@
         android:id="@+id/invalid_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/usertickets_listitem"
+        tools:listitem="@layout/listitem_usertickets"
         android:scrollbars="vertical"
         android:background="@color/white"
         />

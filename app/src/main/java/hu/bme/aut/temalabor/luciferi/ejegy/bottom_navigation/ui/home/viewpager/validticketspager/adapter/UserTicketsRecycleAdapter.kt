@@ -17,7 +17,7 @@ class UserTicketsRecycleAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         context = parent.context
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.usertickets_listitem,parent,false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.listitem_usertickets,parent,false)
         return MyViewHolder(v)
     }
 

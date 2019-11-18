@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_store_activity_tickets"
-        tools:listitem="@layout/ticket_store_activity_item"
+        tools:listitem="@layout/listitem_ticket_store_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

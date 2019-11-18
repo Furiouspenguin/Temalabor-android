@@ -1,8 +1,6 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.store.adapter
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.TicketTypeWithPrice
-import kotlinx.android.synthetic.main.ticket_type_primarydark.view.*
-import org.jetbrains.anko.backgroundColor
+import kotlinx.android.synthetic.main.listitem_ticket_type_primarydark.view.*
 
 class StoreRecyclerAdapter(val context : Context) :
     /*ListAdapter<TicketTypeWithPrice, StoreRecyclerAdapter.MyViewHolder>(
@@ -63,7 +60,7 @@ class StoreRecyclerAdapter(val context : Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(/*parent.*/context).inflate(R.layout.ticket_type_primarydark,parent,false))
+        return MyViewHolder(LayoutInflater.from(/*parent.*/context).inflate(R.layout.listitem_ticket_type_primarydark,parent,false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

@@ -35,8 +35,6 @@ class StoreFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
 
-    //TODO: a tickets és a tickets/buy kell itt
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
