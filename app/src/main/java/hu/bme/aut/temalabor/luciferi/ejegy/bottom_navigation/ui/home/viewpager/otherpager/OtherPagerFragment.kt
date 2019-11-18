@@ -55,8 +55,6 @@ class OtherPagerFragment : Fragment(){
                 }
             }
             adapter.notifyDataSetChanged()
-
-            longToast("Got data")
         })
 /*
         if (tickets.isEmpty()){

@@ -7,7 +7,6 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import kotlinx.android.synthetic.main.activity_user_ticket.*
 import net.glxn.qrgen.android.QRCode
-import org.jetbrains.anko.longToast
 import java.lang.Exception
 
 class UserTicketActivity : AppCompatActivity() {
@@ -33,7 +32,6 @@ class UserTicketActivity : AppCompatActivity() {
         } catch (e : Exception) {
             e.printStackTrace()
         }
-        //longToast(ticket.validUntil)
         title = ticket.ticketType.name
         ticket_id_number.text = ticket.ticketType.typeId
 

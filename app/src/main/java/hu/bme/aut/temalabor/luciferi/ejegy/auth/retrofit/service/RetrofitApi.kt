@@ -45,6 +45,14 @@ interface RetrofitApi {
     @GET("/user")
     fun getUser() : Call<UserData>
 
+    @GET("/user/{userId}/tickets")
+    fun getUserTickets(@Path("userId") userId : String) : Call<List<UserTicket>>
+
+/*
+
+    @DELETE("/user/{userId}")
+    fun deleteUser(@Path("userId") userId : String) : Call<ResponseBody>
+
     @GET("/user/{userId}")
     fun getUser(@Path("userId") userId : String) : Call<UserData>
 
@@ -56,15 +64,9 @@ interface RetrofitApi {
         @Field("idCard") idCard: String
     ) : Call<ResponseBody>
 
-    @DELETE("/user/{userId}")
-    fun deleteUser(@Path("userId") userId : String) : Call<ResponseBody>
-
-    @GET("/user/{userId}/tickets")
-    fun getUserTickets(@Path("userId") userId : String) : Call<List<UserTicket>>
-
     @GET("/users")
     fun getUsers() : Call<List<UserData>>
-
+*/
     ////////////////////////////////////
 
     ////////////////TICKET////////////////
@@ -111,29 +113,29 @@ interface RetrofitApi {
 
     @POST("/tickets/buy")
     @FormUrlEncoded
-    fun postTicketsBuyPassTicket(
+    fun postTicketsBuyFromDate(
         @Field("typeId") typeId: String,
         @Field("fromDate") fromDate: String,
         @Field("count") count: Int = 1
-    ) : Call<ResponseBody>
+    ) : Call<List<UserTicket>>
 
     @POST("/tickets/buy")
     @FormUrlEncoded
     fun postTicketsBuy(
         @Field("typeId") typeId: String,
         @Field("count") count: Int = 1
-    ) : Call<ResponseBody>
+    ) : Call<List<UserTicket>>
 
     @POST("/tickets/validate")
     @FormUrlEncoded
-    fun postTicketsValidate(@Field("id") ticketId: String) : Call<ResponseBody>
+    fun postTicketsValidate(@Field("vehicleId") vehicleId: String) : Call<ResponseBody>
 
-
+/*
     @POST("/tickets/inspect")
     fun postTicketsInspect(@Field("id") ticketId: String) : Call<InspectTicket>
-
+*/
     ////////////////////////////////
-
+/*
     ////////////////TRANSPORT LINE////////////////
 
     //post a new line
@@ -163,7 +165,8 @@ interface RetrofitApi {
     fun getLines(): Call<List<Line>>
 
     ////////////////////////////////
-
+*/
+/*
     ////////////////VEHICLE////////////////
 
     //post new vehicle
@@ -195,4 +198,5 @@ interface RetrofitApi {
     fun getVehicles() : Call<List<Vehicle>>
 
     ////////////////////////////////
+*/
 }

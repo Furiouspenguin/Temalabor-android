@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/rounded_corners_white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -67,7 +67,7 @@
             android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <Button
             android:id="@+id/login"
@@ -106,44 +106,47 @@
             app:layout_constraintVertical_bias="0.3" />
 
 
-
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="@string/forgot_your_password"
-            android:textStyle="italic"
-
             android:layout_marginStart="34dp"
             android:layout_marginTop="24dp"
+
+            android:text="@string/forgot_your_password"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login"
-            />
+            app:layout_constraintTop_toBottomOf="@id/login" />
 
         <TextView
             android:id="@+id/reg_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_now_text"
-            android:textColor="@color/colorPrimaryDark"
-
+            android:layout_marginTop="24dp"
             android:layout_marginStart="34dp"
             android:layout_marginBottom="24dp"
+
+            android:text="@string/register_now_text"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/sign_up_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/sign_up_text"
+
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
-
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/reg_question"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

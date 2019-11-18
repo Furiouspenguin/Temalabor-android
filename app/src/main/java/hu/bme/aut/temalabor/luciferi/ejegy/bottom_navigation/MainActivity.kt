@@ -11,7 +11,6 @@ import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import org.jetbrains.anko.longToast
-import java.lang.Exception
 
 
 //TODO: REPOSITORY + LIVEDATA KELL!!!!!!!!!!
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_store, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_store, R.id.navigation_settings
             )
         )
 
@@ -40,18 +39,5 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         userData = RestApiRepository.getUserData().value
-        longToast(userData.toString())
-/*
-        try {
-            userData = UserData(
-                intent.getStringExtra("id"),
-                intent.getStringExtra("email"),
-                intent.getStringExtra("name"),
-                intent.getStringExtra("idCard"),
-                intent.getStringExtra("type"))
-        }catch (e : Exception){
-            e.printStackTrace()
-        }
-*/
     }
 }

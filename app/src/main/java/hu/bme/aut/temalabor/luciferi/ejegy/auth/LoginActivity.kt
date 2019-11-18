@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.LoginFragment
@@ -54,9 +55,6 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
         finish()
     }
 
-    //private lateinit var db : AppDatabase
-    //private var emptyUserList : Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -67,26 +65,6 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
             .addToBackStack(null)
             .add(R.id.login_fragment,LoginFragment())
             .commit()
-
-
-        //Room adatkezelés
-        /*db = AppDatabase(this)
-
-        //ha már egyszer bejelentkezett a felhasználó, akkor jelentkezzünk be neki egyből
-        //mivel az SQL-kezelés hosszabb időt vehet igénybe, így másik szálon indítjuk.
-        //ahhoz hogy adatot kaphassunk vissza a szálról, egy interface-t valósítunk meg,
-        //amellyel meghívhatunk egy függvényt a szálon zajló folyamat végeztével (itt: beírjuk az adatokat és bejelentkezünk)
-
-        AsyncGetDataFromRoom(db) { user ->
-            if (!user.email.isNullOrEmpty() and !user.password.isNullOrEmpty()) {
-                emptyUserList = false
-                username.setText(user.email)
-                password.setText(user.password)
-
-                loading.visibility = View.VISIBLE
-                //TODO: DO THE ACTUAL LOGING IN
-            }
-        }.execute()*/
     }
 }
 
@@ -104,19 +82,3 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
 }
-
-
-/*private class AsyncGetDataFromRoom(val db : AppDatabase, val callback : (User) -> Unit) : AsyncTask<User, Unit, User>() {
-    override fun doInBackground(vararg params: User): User {
-        val previousUsers = db.userDao().getAll()
-        if (previousUsers.isNotEmpty()) {
-            return previousUsers.last()
-        }
-        return User(null,"","")     //üres user
-    }
-
-    override fun onPostExecute(result: User) {
-        super.onPostExecute(result)
-        callback.invoke(result)
-    }
-}*/

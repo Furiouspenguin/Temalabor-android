@@ -49,8 +49,18 @@
         android:id="@+id/qr"
         android:scaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_turquoise"
         android:layout_marginBottom="32dp"
         />
+
+    <Button
+        android:id="@+id/start_qr_scan"
+        android:text="@string/validate_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primarydark"
+        android:textColor="@color/white"
+        />
+
 </LinearLayout>

@@ -49,7 +49,6 @@ class StoreCategoryActivity : AppCompatActivity() {
         adapter.setOnItemCickListener(object : StoreActivityRecyclerAdapter.OnItemClickListener{
             override fun onItemClick(position : Int) {
                 val ticket : String = GsonBuilder().create().toJson(list[position])
-                toast("item clicked")
                 startActivity<BuyTicketActivity>(
                     "ticket" to ticket
                 )

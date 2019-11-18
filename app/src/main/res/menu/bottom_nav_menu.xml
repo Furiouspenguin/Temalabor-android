@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/navigation_store"
-        android:icon="@drawable/ic_receipt_black_24dp"
+        android:icon="@drawable/ic_park_tickets_couple"
         android:title="@string/title_store" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_person_outline_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/title_settings" />
 
 </menu>

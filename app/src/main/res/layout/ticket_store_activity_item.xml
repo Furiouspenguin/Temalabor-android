@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="@string/ticket_name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/ticket_price"
@@ -23,5 +24,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/ticket_name"/>
+        android:layout_below="@id/ticket_name"
+        android:textColor="@color/white"/>
 </RelativeLayout>

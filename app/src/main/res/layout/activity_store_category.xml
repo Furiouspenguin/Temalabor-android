@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bottom_navigation.ui.store.StoreCategoryActivity">
+    tools:context=".bottom_navigation.ui.store.StoreCategoryActivity"
+    android:padding="16dp">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="16dp"
         android:id="@+id/recyclerview_store_activity_tickets"
         tools:listitem="@layout/ticket_store_activity_item"
         android:layout_width="match_parent"

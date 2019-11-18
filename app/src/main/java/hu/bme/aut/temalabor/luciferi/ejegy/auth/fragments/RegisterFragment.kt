@@ -10,13 +10,10 @@ import androidx.fragment.app.Fragment
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.afterTextChanged
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
-import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient.api
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.android.synthetic.main.fragment_register.username
-import okhttp3.Response
-import okhttp3.ResponseBody
+import kotlinx.android.synthetic.main.fragment_register.email
 import org.jetbrains.anko.support.v4.longToast
 
 class RegisterFragment : Fragment(){
@@ -24,6 +21,7 @@ class RegisterFragment : Fragment(){
     private var userData : UserData? = null
 
     private var btnEnableUser = false
+    private var btnEnableEmail = false
     private var btnEnableIdCard = false
     private var btnEnablePwd = false
     private var btnEnablePwdConfirm = false
@@ -44,13 +42,22 @@ class RegisterFragment : Fragment(){
             listener?.loginNow()
         }
 
-        username.afterTextChanged{text ->
+        name.afterTextChanged{text ->
             if (text.isEmpty()){
-                username.error = "Need email!"
-                username.requestFocus()
+                name.error = "Need name!"
+                name.requestFocus()
                 btnEnableUser = false
                 register.isEnabled = false
             } else btnEnableUser = true
+            enableRegBtn()
+        }
+        email.afterTextChanged{ text ->
+            if (text.isEmpty()){
+                email.error = "Need email!"
+                email.requestFocus()
+                btnEnableEmail = false
+                register.isEnabled = false
+            } else btnEnableEmail = true
             enableRegBtn()
         }
         idNumber.afterTextChanged {text ->
@@ -87,11 +94,12 @@ class RegisterFragment : Fragment(){
         }
 
         register.setOnClickListener {
-            val usernameString = username.text.toString().trim()
+            val nameString = name.text.toString()
+            val emailString = email.text.toString().trim()
             val passwordString = password.text.toString().trim()
             val idNumberString = idNumber.text.toString().trim()
-            if (usernameString.isNotEmpty() and passwordString.isNotEmpty() and idNumberString.isNotEmpty()) {
-                MyAsyncRegister(usernameString,passwordString,idNumberString){user->
+            if (nameString.isNotEmpty() and emailString.isNotEmpty() and passwordString.isNotEmpty() and idNumberString.isNotEmpty()) {
+                MyAsyncRegister(nameString,emailString,passwordString,idNumberString){ user->
                     userData = user
                     if (user != null){
                         //adatok elmentése
@@ -107,7 +115,7 @@ class RegisterFragment : Fragment(){
     }
 
     fun enableRegBtn(){
-        if (btnEnableUser and btnEnableIdCard and btnEnablePwd and btnEnablePwdConfirm) register.isEnabled = true
+        if (btnEnableUser and btnEnableEmail and btnEnableIdCard and btnEnablePwd and btnEnablePwdConfirm) register.isEnabled = true
     }
 
     override fun onAttach(context: Context) {
@@ -125,13 +133,14 @@ class RegisterFragment : Fragment(){
     }
 
     private class MyAsyncRegister(
-            val username : String,
-            val password : String,
-            val idNumber : String,
-            val callback : (UserData?) -> Unit
+        val name : String,
+        val email : String,
+        val password : String,
+        val idNumber : String,
+        val callback : (UserData?) -> Unit
     ) : AsyncTask<String,Unit, UserData?>(){
         override fun doInBackground(vararg params: String?): UserData? {
-            val callSyncRegister = api.register(email = username, password = password, idCard = idNumber)
+            val callSyncRegister = api.register(name = name, email = email, password = password, idCard = idNumber)
             val response =callSyncRegister.execute()
             return response.body()
         }

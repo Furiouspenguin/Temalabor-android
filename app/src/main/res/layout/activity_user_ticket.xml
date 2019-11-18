@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".bottom_navigation.ui.home.viewpager.validticketspager.UserTicketActivity"
-    android:padding="16dp">
+    android:padding="16dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +28,6 @@
             android:id="@+id/ticket_id_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/id_number"
             android:layout_below="@id/_id_number"
             android:layout_alignParentEnd="true"
             android:textSize="18sp"
@@ -44,7 +44,6 @@
             android:id="@+id/ticket_valid_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/valid_from"
             android:layout_below="@id/_valid_from"
             android:layout_alignParentEnd="true"
             android:textSize="18sp"
@@ -61,7 +60,6 @@
             android:id="@+id/ticket_valid_until"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/valid_from"
             android:layout_below="@id/_valid_until"
             android:layout_alignParentEnd="true"
             android:textSize="24sp"
@@ -92,6 +90,8 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         android:contentDescription="@string/qr_code"
         android:scaleType="fitCenter"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

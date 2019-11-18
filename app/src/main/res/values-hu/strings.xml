@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ejegy</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email cím</string>
+    <string name="prompt_password">Jelszó</string>
+    <string name="action_sign_in_short">Bejelentkezés</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Kezdőlap</string>
+    <string name="title_store">Áruház</string>
+    <string name="title_settings">Beálltások</string>
+
+
+    <string name="bkk_e_jegy">BKK e-Jegy</string>
+    <string name="forgot_your_password">Elfelejtetted a jelszavad?</string>
+    <string name="register_now_text">Nincs még felhasználód?</string>
+    <string name="sign_up_text">Regisztrálj!</string>
+    <string name="sign_in">Bejelentkezés</string>
+    <string name="sign_up">Regisztráció</string>
+    <string name="prompt_password_confirm">Jelszó megerősítése</string>
+    <string name="sign_in_text">Jelentkezz be!</string>
+    <string name="login_now_text">Van már felhasználód?</string>
+    <string name="id_number">Azonostó szám</string>
+    <string name="unknown">Ismeretlen</string>
+    <string name="type">Típus</string>
+    <string name="end_of_validity">Érvényesség vége:</string>
+    <string name="date">Dátum</string>
+    <string name="tap_to_expand">Mutasd a QR kódot!</string>
+    <string name="qr_code">QR kód</string>
+    <string name="valid_from">Érvényesség kezdete</string>
+    <string name="valid_until">Érvényesség vége</string>
+    <string name="ticket_name">Jegy neve</string>
+    <string name="price">Ár</string>
+    <string name="category">Kategória</string>
+    <string name="dotted_line_divider">szaggatott vonal</string>
+    <string name="quantity">Mennyiség</string>
+    <string name="today">Mai nap</string>
+    <string name="total_payable">Fizetendő:</string>
+    <string name="pay">Fizetés</string>
+    <string name="one">1</string>
+    <string name="example_priceoftickets">3450 HUF</string>
+    <string name="name">Név</string>
+    <string name="favourites">Kedvencek</string>
+    <string name="season_tickets">Bérletek</string>
+    <string name="line_tickets">Vonaljegyek</string>
+    <string name="timebased_tickets">Időalapú jegyek</string>
+    <string name="valid">Érvényes</string>
+    <string name="id">Azonostó</string>
+    <string name="other">Egyéb</string>
+    <string name="validate">Érvényesítés</string>
+    <string name="validate_ticket">Jegy érvényesítés</string>
+</resources>

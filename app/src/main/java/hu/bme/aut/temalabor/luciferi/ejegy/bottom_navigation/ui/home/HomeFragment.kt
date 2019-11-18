@@ -24,7 +24,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        home_pager.adapter = HomePagerAdapter(childFragmentManager)
+
+        val tabTitles = listOf<String>(getString(R.string.id), getString(R.string.valid), getString(
+                    R.string.other))
+        home_pager.adapter = HomePagerAdapter(tabTitles,childFragmentManager)
         tabs.setupWithViewPager(home_pager)
     }
 }

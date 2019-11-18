@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_store" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_settings"
         android:name="hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.settings.SettingsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

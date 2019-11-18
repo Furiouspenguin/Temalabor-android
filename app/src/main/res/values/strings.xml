@@ -1,22 +1,16 @@
 <resources>
-    <string name="app_name">Ejegy</string>
+    <string name="app_name">eTicket</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_store">Store</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bkk_e_jegy">BKK e-Jegy</string>
+
+    <string name="bkk_e_jegy">BKK e-Ticket</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="register_now_text">Haven\'t registered yet?</string>
     <string name="sign_up_text">Sign up!</string>
@@ -27,14 +21,31 @@
     <string name="login_now_text">Do you already have an account?</string>
     <string name="id_number">ID number</string>
     <string name="unknown">Unknown</string>
-    <string name="type">type</string>
+    <string name="type">Type</string>
     <string name="end_of_validity">End of validity:</string>
-    <string name="date">date</string>
-    <string name="tap_to_expand">Tap to expand</string>
+    <string name="date">Date</string>
+    <string name="tap_to_expand">Show QR code!</string>
     <string name="dotted_line_divider">dotted line divider</string>
-    <string name="qr_code">qr code</string>
+    <string name="qr_code">QR code</string>
     <string name="valid_from">Valid from</string>
-    <string name="ticket_name">ticket name</string>
-    <string name="price">price</string>
+    <string name="valid_until">Valid until</string>
+    <string name="ticket_name">Ticket name</string>
+    <string name="price">Price</string>
     <string name="category">Category</string>
+    <string name="quantity">Quantity</string>
+    <string name="today">Today</string>
+    <string name="pay">Pay</string>
+    <string name="total_payable">Total payable:</string>
+    <string name="one">1</string>
+    <string name="example_priceoftickets">3450 HUF</string>
+    <string name="name">Name</string>
+    <string name="favourites">Favourites</string>
+    <string name="season_tickets">Season tickets</string>
+    <string name="line_tickets">Line tickets</string>
+    <string name="timebased_tickets">Time-based tickets</string>
+    <string name="id">ID</string>
+    <string name="valid">Valid</string>
+    <string name="other">Other</string>
+    <string name="validate">Validate</string>
+    <string name="validate_ticket">Validate ticket</string>
 </resources>

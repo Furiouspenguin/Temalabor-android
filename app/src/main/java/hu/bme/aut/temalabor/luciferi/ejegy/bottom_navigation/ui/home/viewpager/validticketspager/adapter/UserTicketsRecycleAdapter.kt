@@ -1,16 +1,22 @@
 package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 
-class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter.MyViewHolder>() {
+class UserTicketsRecycleAdapter :
+    RecyclerView.Adapter<UserTicketsRecycleAdapter.MyViewHolder>() {
+
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        context = parent.context
         val v = LayoutInflater.from(parent.context).inflate(R.layout.usertickets_listitem,parent,false)
         return MyViewHolder(v)
     }
@@ -24,6 +30,11 @@ class UserTicketsRecycleAdapter : RecyclerView.Adapter<UserTicketsRecycleAdapter
         holder.typeTextView.text = ticket.ticketType.name
         if (!(ticket.validFrom.isNullOrEmpty() or ticket.validUntil.isNullOrEmpty())) {
             holder.dateTextView.text = ticket.validUntil.subSequence(0,10)
+        }
+        when(ticket.ticketType.type){
+            "passTicket" -> holder.itemView.background = ContextCompat.getDrawable(context,R.drawable.rounded_corners_gold)
+            "lineTicket" -> holder.itemView.background = ContextCompat.getDrawable(context,R.drawable.rounded_corners_turquoise)
+            "timeTicket" -> holder.itemView.background = ContextCompat.getDrawable(context,R.drawable.rounded_corners_primarydark)
         }
     }
 

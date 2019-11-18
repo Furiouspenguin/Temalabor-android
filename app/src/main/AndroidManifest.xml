@@ -3,6 +3,7 @@
     package="hu.bme.aut.temalabor.luciferi.ejegy">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -13,12 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".bottom_navigation.ui.home.viewpager.idpager.QRScannerActivity"></activity>
         <activity
             android:name=".bottom_navigation.ui.store.BuyTicketActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:name=".bottom_navigation.ui.store.StoreCategoryActivity"
-            android:parentActivityName=".bottom_navigation.MainActivity"/>
+            android:parentActivityName=".bottom_navigation.MainActivity" />
         <activity
             android:name=".bottom_navigation.ui.home.viewpager.validticketspager.UserTicketActivity"
             android:parentActivityName=".bottom_navigation.MainActivity"

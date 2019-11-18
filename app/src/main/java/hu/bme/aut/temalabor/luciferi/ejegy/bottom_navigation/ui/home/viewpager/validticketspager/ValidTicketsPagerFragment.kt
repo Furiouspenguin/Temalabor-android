@@ -13,7 +13,6 @@ import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.adapter.UserTicketsRecycleAdapter
 import kotlinx.android.synthetic.main.fragment_pager_validtickets.*
-import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.startActivity
 
 class ValidTicketsPagerFragment : Fragment(){
@@ -56,8 +55,6 @@ class ValidTicketsPagerFragment : Fragment(){
                 }
             }
             adapter.notifyDataSetChanged()
-
-            longToast("Got data")
         })
 /*
         if (tickets.isEmpty()){
