@@ -99,6 +99,9 @@ class RegisterFragment : Fragment(){
             val passwordString = password.text.toString().trim()
             val idNumberString = idNumber.text.toString().trim()
             if (nameString.isNotEmpty() and emailString.isNotEmpty() and passwordString.isNotEmpty() and idNumberString.isNotEmpty()) {
+
+                loading.visibility = View.VISIBLE
+
                 MyAsyncRegister(nameString,emailString,passwordString,idNumberString){ user->
                     userData = user
                     if (user != null){
@@ -109,6 +112,8 @@ class RegisterFragment : Fragment(){
                     } else {
                         longToast("Coulnd't fetch data!")
                     }
+
+                    loading.visibility = View.GONE
                 }.execute()
             }
         }

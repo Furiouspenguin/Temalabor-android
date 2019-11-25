@@ -49,10 +49,7 @@ class OtherPagerFragment : Fragment(){
 
             tickets=ArrayList(usertickets)
             tickets.forEach {
-                if (it.validFrom.isNullOrEmpty() or it.validUntil.isNullOrEmpty()) {
-                    invalidTickets.add(it)
-                    adapter.addTicket(it)
-                }
+                adapter.addTicket(it)
             }
             adapter.notifyDataSetChanged()
         })

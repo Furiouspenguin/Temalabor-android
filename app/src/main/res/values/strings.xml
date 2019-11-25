@@ -48,4 +48,8 @@
     <string name="other">Other</string>
     <string name="validate">Validate</string>
     <string name="validate_ticket">Validate ticket</string>
+    <string name="get_vehicle">Get Vehicle</string>
+    <string name="logout">Logout</string>
+    <string name="change_password">Change password</string>
+    <string name="old_password">Old password</string>
 </resources>

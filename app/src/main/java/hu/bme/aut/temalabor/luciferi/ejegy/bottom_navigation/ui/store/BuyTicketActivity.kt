@@ -22,16 +22,11 @@ import java.util.*
 class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateListener {
 
     private var ticket : TicketTypeWithPrice? = null
-
     private var type : String = "lineTicket"
-
     private var year : String = Calendar.getInstance().get(Calendar.YEAR).toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
 
         try {
             val type = object : TypeToken<TicketTypeWithPrice>() {}.type
@@ -65,9 +60,13 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
                     }
 
                     buy_pay_btn.setOnClickListener {
+                        loading.visibility = View.VISIBLE
+
                         MyAsyncBuy(buy_valid_from_date.text.toString(),ticket!!.typeId,edit_quantity.text.toString().toInt()){
                             if (it.isNotEmpty()) longToast("${it.size}db jegy megvásárolva")
                             else toast("Transaction failed")
+
+                            loading.visibility = View.GONE
                         }.execute()
                         finish()
                         RestApiRepository.setUserTicketsFromApi()
@@ -78,9 +77,13 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
                 "lineTicket" -> {
                     setContentView(R.layout.activity_buy_lineticket)
                     buy_pay_btn.setOnClickListener {
+                        loading.visibility = View.VISIBLE
+
                         MyAsyncBuy(null,ticket!!.typeId,edit_quantity.text.toString().toInt()){
                             if (it.isNotEmpty()) longToast("${it.size}db jegy megvásárolva")
                             else toast("Transaction failed")
+
+                            loading.visibility = View.GONE
                         }.execute()
                         finish()
                         RestApiRepository.setUserTicketsFromApi()
@@ -106,10 +109,14 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
                         }
                     }
                     buy_pay_btn.setOnClickListener {
+                        loading.visibility = View.VISIBLE
+
                         val fromDate : String = year + "-" + buy_valid_from_date.text.toString()
                         MyAsyncBuy(fromDate,ticket!!.typeId,edit_quantity.text.toString().toInt()){
                             if (it.isNotEmpty()) longToast("${it.size}db jegy megvásárolva")
                             else toast("Transaction failed")
+
+                            loading.visibility = View.GONE
                         }.execute()
                         finish()
                         RestApiRepository.setUserTicketsFromApi()
@@ -136,7 +143,8 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
     }
 
     fun setValidUntil(v : View) {
-        toast("Function not yet implemented")
+        //toast("Function not yet implemented")
+        //Nem reális hogy bárkinek kellene
     }
 
     override fun onPassDateSelected(day: Int, month: Int, year: Int) {

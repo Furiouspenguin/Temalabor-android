@@ -27,7 +27,6 @@ interface RetrofitApi {
     ) : Call<UserData>
 
     @POST("/auth/logout")
-    @FormUrlEncoded
     fun logout() : Call<ResponseBody>
 
     @POST("/auth/password")
@@ -129,10 +128,13 @@ interface RetrofitApi {
     @FormUrlEncoded
     fun postTicketsValidate(@Field("vehicleId") vehicleId: String) : Call<ResponseBody>
 
-/*
+
     @POST("/tickets/inspect")
-    fun postTicketsInspect(@Field("id") ticketId: String) : Call<InspectTicket>
-*/
+    fun postTicketsInspect(
+        @Field("id") ticketId: String,
+        @Field("vehicleId") vehicleId: String
+    ) : Call<InspectTicket>
+
     ////////////////////////////////
 /*
     ////////////////TRANSPORT LINE////////////////

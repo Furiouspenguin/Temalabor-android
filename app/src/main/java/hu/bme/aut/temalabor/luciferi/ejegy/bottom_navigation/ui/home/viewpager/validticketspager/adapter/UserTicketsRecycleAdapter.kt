@@ -60,7 +60,12 @@ class UserTicketsRecycleAdapter :
     fun setOnItemCickListener(listener : OnItemClickListener){
         this.listener = listener
     }
-
+/*
+    fun clearList(){
+        val size = tickets.size
+        tickets.clear()
+        notifyItemRangeRemoved(0,size)
+    }*/
 
     fun addTicket(ticket: UserTicket?) {
         ticket ?: return

@@ -11,9 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.validticketspager.adapter.UserTicketsRecycleAdapter
+import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import kotlinx.android.synthetic.main.fragment_pager_validtickets.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 class ValidTicketsPagerFragment : Fragment(){
 
@@ -46,28 +49,25 @@ class ValidTicketsPagerFragment : Fragment(){
         recyclerview.adapter = adapter
 
         validTicketsPagerViewModel.tickets?.observe(this, Observer {usertickets->
+/*
+            tickets=ArrayList(usertickets)
+            if (tickets.isNotEmpty()) toast(tickets.size.toString())
+            adapter.clearList()
+            tickets.forEach {
+                /*if (!it.validFrom.isNullOrEmpty() and !it.validUntil.isNullOrEmpty()) {
+                    validTickets.add(it)
+                    adapter.addTicket(it)
+                }*/
+                adapter.addTicket(it)
+            }
+            adapter.notifyDataSetChanged()*/
 
             tickets=ArrayList(usertickets)
             tickets.forEach {
-                if (!it.validFrom.isNullOrEmpty() and !it.validUntil.isNullOrEmpty()) {
-                    validTickets.add(it)
-                    adapter.addTicket(it)
-                }
+                adapter.addTicket(it)
             }
             adapter.notifyDataSetChanged()
         })
-/*
-        if (tickets.isEmpty()){
-            RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){
-                tickets = ArrayList(it)
-                //tickets.sortWith(compareBy { it.validUntil })
-                tickets.forEach {
-                    adapter.addTicket(it)
-                }
-                RestApiRepository.setUserTickets(it)
-            }.execute()
-        }*/
-
 
         adapter.setOnItemCickListener(object : UserTicketsRecycleAdapter.OnItemClickListener{
             override fun onItemClick(ticketPosition: Int) {

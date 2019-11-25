@@ -49,4 +49,8 @@
     <string name="other">Egyéb</string>
     <string name="validate">Érvényesítés</string>
     <string name="validate_ticket">Jegy érvényesítés</string>
+    <string name="get_vehicle">Jármű beállítása</string>
+    <string name="logout">Kijelentkezés</string>
+    <string name="change_password">Jelszó változtatása</string>
+    <string name="old_password">Régi jelszó</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import kotlinx.android.synthetic.main.fragment_pager_id.*
 import net.glxn.qrgen.android.QRCode
 import org.jetbrains.anko.support.v4.startActivity
@@ -22,6 +23,7 @@ class IDPagerFragment : Fragment(){
     private val permission = arrayOf(Manifest.permission.CAMERA)
 
     private lateinit var idPagerViewModel: IDPagerViewModel
+    private lateinit var userType : String
 
     companion object{
         private const val PERMISSION_REQUEST = 10
@@ -37,6 +39,7 @@ class IDPagerFragment : Fragment(){
         val root = inflater.inflate(hu.bme.aut.temalabor.luciferi.ejegy.R.layout.fragment_pager_id,container,false)
 
         idPagerViewModel.userData?.observe(this, Observer {
+            //userType = it.type
             name.text = it.name
             idNumber.text = it.idCard
             val myBitmap = QRCode.from(it.id).withColor(0xFFFFFFFF.toInt(),0xE612B4AA.toInt()).withSize(500,500).bitmap()
@@ -48,17 +51,58 @@ class IDPagerFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        start_qr_scan.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkPermission(permission)) {
-                    startActivity<QRScannerActivity>()
+
+
+        userType = RestApiRepository.getUserData().value!!.type
+        if(userType == "inspector") {
+            start_vehicle_qr_scan.visibility = View.VISIBLE
+            start_vehicle_qr_scan.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkPermission(permission)) {
+                        startActivity<QRScannerActivity>("type" to "vehicle")
+
+                    } else {
+                        requestPermissions(permission,
+                            PERMISSION_REQUEST
+                        )
+                    }
                 } else {
-                    requestPermissions(permission,
-                        PERMISSION_REQUEST
-                    )
+                    startActivity<QRScannerActivity>("type" to "vehicle")
+
                 }
-            } else {
-                startActivity<QRScannerActivity>()
+            }
+
+            start_ticket_qr_scan.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkPermission(permission)) {
+                        startActivity<QRScannerActivity>("type" to "inspect")
+
+                    } else {
+                        requestPermissions(permission,
+                            PERMISSION_REQUEST
+                        )
+                    }
+                } else {
+                    startActivity<QRScannerActivity>("type" to "inspect")
+
+                }
+            }
+        }
+        else {
+            start_vehicle_qr_scan.visibility = View.GONE
+
+            start_ticket_qr_scan.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkPermission(permission)) {
+                        startActivity<QRScannerActivity>("type" to "validate")
+                    } else {
+                        requestPermissions(permission,
+                            PERMISSION_REQUEST
+                        )
+                    }
+                } else {
+                    startActivity<QRScannerActivity>("type" to "validate")
+                }
             }
         }
     }

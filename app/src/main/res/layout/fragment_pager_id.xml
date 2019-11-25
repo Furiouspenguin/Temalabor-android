@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:scrollbars="vertical">
 
     <LinearLayout
         android:id="@+id/userdata"
@@ -45,6 +46,28 @@
 
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/start_vehicle_qr_scan"
+        android:text="@string/get_vehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_gold"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/start_ticket_qr_scan"
+        android:text="@string/validate_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primarydark"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        />
+
     <ImageView
         android:id="@+id/qr"
         android:scaleType="fitCenter"
@@ -52,15 +75,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_turquoise"
         android:layout_marginBottom="32dp"
-        />
-
-    <Button
-        android:id="@+id/start_qr_scan"
-        android:text="@string/validate_ticket"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corners_primarydark"
-        android:textColor="@color/white"
         />
 
 </LinearLayout>

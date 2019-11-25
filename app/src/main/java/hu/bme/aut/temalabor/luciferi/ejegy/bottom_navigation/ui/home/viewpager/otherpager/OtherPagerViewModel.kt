@@ -11,7 +11,8 @@ class OtherPagerViewModel : ViewModel() {
     private var _tickets : MutableLiveData<List<UserTicket>>? = null
     init {
         if (_tickets == null) {
-            _tickets = RestApiRepository.getUserTickets()
+            //_tickets = RestApiRepository.getUserTickets()
+            _tickets = RestApiRepository.getInvalidUserTickets()
 /*
             if (_tickets == null || _tickets?.value.isNullOrEmpty()) {
                 RetrofitClient.MyAsyncGetUserTickets(RestApiRepository.getUserData().value!!.id){

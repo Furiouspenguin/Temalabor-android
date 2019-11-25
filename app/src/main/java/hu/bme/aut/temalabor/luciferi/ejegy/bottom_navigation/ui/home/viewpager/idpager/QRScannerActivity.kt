@@ -11,14 +11,24 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 import okhttp3.ResponseBody
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
+import java.lang.Exception
 
 class QRScannerActivity : Activity(), ZXingScannerView.ResultHandler {
-    private lateinit var mScannerView : ZXingScannerView
+    private lateinit var mScannerView: ZXingScannerView
+    private lateinit var type: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mScannerView = ZXingScannerView(this)
         setContentView(mScannerView)
+
+        try {
+            type = intent.getStringExtra("type")
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     override fun onResume() {
@@ -35,19 +45,54 @@ class QRScannerActivity : Activity(), ZXingScannerView.ResultHandler {
     override fun handleResult(rawResult: Result?) {
         longToast(rawResult.toString())
 
-        MyAsyncValidate(rawResult.toString()){
-            toast(it)
-            RestApiRepository.setUserTicketsFromApi()
-        }.execute()
+        when (type) {
+            "validate" -> {
+                MyAsyncValidate(rawResult.toString()) {
+                    toast(it)
+                    RestApiRepository.setUserTicketsFromApi()
+                }.execute()
+            }
+            "inspect" -> {
+                MyAsyncInspect(rawResult.toString()) {
+                    toast(it)
+                }.execute()
+            }
+            "vehicle" -> {
+                RestApiRepository.inspectorVehicle = rawResult.toString()
+            }
+        }
         finish()
     }
 
-    class MyAsyncValidate(val vehicleId : String, val callback : (String) -> Unit) : AsyncTask<String,Unit,String>(){
+    class MyAsyncValidate(val vehicleId: String, val callback: (String) -> Unit) :
+        AsyncTask<String, Unit, String>() {
         override fun doInBackground(vararg params: String?): String {
             val callSyncGetUserTickets = RetrofitClient.api.postTicketsValidate(vehicleId)
 
-            val response =callSyncGetUserTickets.execute()
+            val response = callSyncGetUserTickets.execute()
             return response.message()
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            callback.invoke(result ?: "nothing")
+        }
+    }
+
+    class MyAsyncInspect(val ticketId: String, val callback: (String) -> Unit) :
+        AsyncTask<String, Unit, String>() {
+        override fun doInBackground(vararg params: String?): String {
+            if (RestApiRepository.inspectorVehicle == null) {
+                return "Set vehicle first!"
+            } else {
+                val callSyncGetUserTickets = RetrofitClient.api.postTicketsInspect(
+                    ticketId = ticketId,
+                    vehicleId = RestApiRepository.inspectorVehicle!!
+                )
+
+                val response = callSyncGetUserTickets.execute()
+                return response.body()?.status ?: response.message()
+            }
         }
 
         override fun onPostExecute(result: String?) {

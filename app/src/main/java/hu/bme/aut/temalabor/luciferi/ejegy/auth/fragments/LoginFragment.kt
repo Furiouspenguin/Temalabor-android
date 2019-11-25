@@ -76,7 +76,9 @@ class LoginFragment :Fragment(){
             val passwordString = password.text.toString().trim()
             //login backend elérése
             if (usernameString.isNotEmpty() and passwordString.isNotEmpty()){
-                //do something
+
+                loading.visibility = View.VISIBLE
+
                 RetrofitClient.MyAsyncLogin(usernameString, passwordString) { user ->
                     //longToast("Curent user data:\n${user.toString()}")
                     userData = user
@@ -94,6 +96,8 @@ class LoginFragment :Fragment(){
                     } else {
                         longToast("Coulnd't fetch data!")
                     }
+
+                    View.GONE
                 }.execute()
             }
         }

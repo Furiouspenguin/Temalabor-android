@@ -44,8 +44,18 @@ class UserTicketActivity : AppCompatActivity() {
                     ticket_valid_until.text = ticket.validUntil.subSequence(0,10)
                 }
                 else {
-                    ticket_valid_from.text = "-"
-                    ticket_valid_until.text = "-"
+                    if (ticket.validFrom.isNullOrEmpty()) {
+                        ticket_valid_from.text = "-"
+                    }
+                    else {
+                        ticket_valid_from.text = ticket.validFrom.subSequence(0,10)
+                    }
+                    if (ticket.validUntil.isNullOrEmpty()) {
+                        ticket_valid_until.text = "-"
+                    }
+                    else {
+                        ticket_valid_until.text = ticket.validUntil.subSequence(0,10)
+                    }
                 }
                 color = 0xF1C40F.toInt()
             }
@@ -55,7 +65,12 @@ class UserTicketActivity : AppCompatActivity() {
                     ticket_valid_until.text = ticket.validUntil.subSequence(11,16)
                 }
                 else {
-                    ticket_valid_until.text = "-"
+                    if (ticket.validUntil.isNullOrEmpty()) {
+                        ticket_valid_until.text = "-"
+                    }
+                    else {
+                        ticket_valid_until.text = ticket.validUntil.subSequence(11,16)
+                    }
                 }
                 color = 0xE612B4AA.toInt()
             }
@@ -65,7 +80,12 @@ class UserTicketActivity : AppCompatActivity() {
                     ticket_valid_until.text = "${ticket.validUntil.subSequence(0,10)}. : ${ticket.validUntil.subSequence(11,16)}"
                 }
                 else {
-                    ticket_valid_until.text = "-"
+                    if (ticket.validUntil.isNullOrEmpty()) {
+                        ticket_valid_until.text = "-"
+                    }
+                    else {
+                        ticket_valid_until.text = "${ticket.validUntil.subSequence(0,10)}. : ${ticket.validUntil.subSequence(11,16)}"
+                    }
                 }
                 color = 0x11ABDB.toInt()
             }

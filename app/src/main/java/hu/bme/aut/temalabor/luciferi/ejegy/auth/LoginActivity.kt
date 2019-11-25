@@ -13,6 +13,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.LoginFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.fragments.RegisterFragment
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
+import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.MainActivity
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import hu.bme.aut.temalabor.luciferi.ejegy.room.AppDatabase
@@ -60,11 +61,35 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLi
         setContentView(R.layout.activity_login)
 
         imageView.setColorFilter(Color.argb(50,200,200,200))
-        supportFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .add(R.id.login_fragment,LoginFragment())
-            .commit()
+
+        MyAsyncCheckUserLoggedIn{user ->
+            if (user != null) {
+                loginSuccess(user)
+            }
+            else {
+                supportFragmentManager
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .add(R.id.login_fragment,LoginFragment())
+                    .commit()
+            }
+        }.execute()
+    }
+
+
+
+    private class MyAsyncCheckUserLoggedIn(val callback : (UserData?) -> Unit) : AsyncTask<String, Unit, UserData?>(){
+        override fun doInBackground(vararg p0: String?): UserData? {
+            val callSyncLoginUser = RetrofitClient.api.getUser()
+
+            val response =callSyncLoginUser.execute()
+            return response.body()
+        }
+
+        override fun onPostExecute(result: UserData?) {
+            super.onPostExecute(result)
+            callback.invoke(result)
+        }
     }
 }
 

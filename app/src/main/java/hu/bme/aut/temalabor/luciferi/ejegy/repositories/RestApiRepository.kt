@@ -4,6 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 object RestApiRepository {
 
@@ -21,6 +24,8 @@ object RestApiRepository {
 
 
     private var userTickets = ArrayList<UserTicket>()
+
+
     private var validUserTickets = ArrayList<UserTicket>()
     private var invalidUserTickets = ArrayList<UserTicket>()
 
@@ -34,12 +39,23 @@ object RestApiRepository {
         MutableLiveData<List<UserTicket>>().apply { value = invalidUserTickets }
 
     fun setUserTickets(tickets : List<UserTicket>){
+        userTickets.clear()
         userTickets = ArrayList(tickets)
         userTickets.forEach {
+            val now = Calendar.getInstance().time
             if (it.validFrom.isNullOrEmpty() or it.validUntil.isNullOrEmpty()) {
                 invalidUserTickets.add(it)
             } else {
-                validUserTickets.add(it)
+                val df = SimpleDateFormat("yyyy-MM-dd",Locale.GERMAN)
+                val validFromDate = df.parse(it.validFrom.subSequence(0,10).toString())
+
+                val isDue =  (0 > validFromDate.compareTo(now))
+                if (isDue) {
+                    validUserTickets.add(it)
+                }
+                else {
+                    invalidUserTickets.add(it)
+                }
             }
         }
     }
@@ -47,14 +63,9 @@ object RestApiRepository {
     fun setUserTicketsFromApi(){
         RetrofitClient.MyAsyncGetUserTickets(userData!!.id){
             setUserTickets(it)
-            it.forEach {
-                if (it.validFrom.isNullOrEmpty() or it.validUntil.isNullOrEmpty()) {
-                    invalidUserTickets.add(it)
-                } else {
-                    validUserTickets.add(it)
-                }
-            }
         }.execute()
     }
+
+    var inspectorVehicle : String? = null
 
 }
