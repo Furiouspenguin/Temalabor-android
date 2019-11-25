@@ -15,11 +15,10 @@ interface RetrofitApi {
         @Field("name") name : String = "Anonymus",
         @Field("email") email : String,
         @Field("idCard") idCard : String,
-        @Field("password") password : String,
-        @Field("type") type : String = "user"
+        @Field("password") password : String/*,
+        @Field("type") type : String = "user"*/
     ) : Call<UserData>
 
-    //TESZTELVE, JÓ!
     @POST("/auth/login")
     @FormUrlEncoded
     fun loginUser(

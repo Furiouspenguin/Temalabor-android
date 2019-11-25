@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".bottom_navigation.ui.home.viewpager.validticketspager.UserTicketActivity"
     android:padding="16dp"
+    android:background="@color/turquoise"
     >
 
     <RelativeLayout
@@ -18,53 +19,34 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/_id_number"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/id_number"
-            android:textSize="18sp"/>
-        <TextView
-            android:id="@+id/ticket_id_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/_id_number"
-            android:layout_alignParentEnd="true"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"/>
-        <TextView
-            android:id="@+id/_valid_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/valid_from"
-            android:layout_below="@id/ticket_id_number"
-            android:textSize="18sp"/>
-        <TextView
-            android:id="@+id/ticket_valid_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/_valid_from"
-            android:layout_alignParentEnd="true"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"/>
-        <TextView
-            android:id="@+id/_valid_until"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/valid_from"
-            android:layout_below="@id/ticket_valid_from"
-            android:textSize="18sp"/>
-        <TextView
-            android:id="@+id/ticket_valid_until"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/_valid_until"
-            android:layout_alignParentEnd="true"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"/>
+            android:background="@drawable/rounded_corners_translucent_white"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp"
+            >
+
+            <TextView
+                android:id="@+id/_valid_until"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/valid_until"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/ticket_valid_until"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/_valid_until"
+                android:layout_alignParentEnd="true"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"/>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 

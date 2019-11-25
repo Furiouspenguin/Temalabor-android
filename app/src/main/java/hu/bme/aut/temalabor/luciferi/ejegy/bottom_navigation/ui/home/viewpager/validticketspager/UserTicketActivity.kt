@@ -2,10 +2,11 @@ package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
-import kotlinx.android.synthetic.main.activity_user_ticket.*
+import kotlinx.android.synthetic.main.activity_user_passticket.*
 import net.glxn.qrgen.android.QRCode
 import java.lang.Exception
 
@@ -16,15 +17,13 @@ class UserTicketActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_ticket)
+
 
         try {
             valid = intent.getBooleanExtra("valid",false)
             if (valid) {
                 ticket = RestApiRepository.getValidUserTickets().value!![intent.getIntExtra("position",-1)]
 
-                ticket_valid_from.text = ticket.validFrom.subSequence(0,10)
-                ticket_valid_until.text = ticket.validUntil.subSequence(0,10)
             } else {
                 ticket = RestApiRepository.getInvalidUserTickets().value!![intent.getIntExtra("position",-1)]
             }
@@ -32,11 +31,47 @@ class UserTicketActivity : AppCompatActivity() {
         } catch (e : Exception) {
             e.printStackTrace()
         }
+
         title = ticket.ticketType.name
-        ticket_id_number.text = ticket.ticketType.typeId
+        var color : Int = 0x11ABDB.toInt()
 
+        when(ticket.ticketType.type) {
+            "passTicket" -> {
+                setContentView(R.layout.activity_user_passticket)
+                ticket_id_number.text = ticket.ticketType.typeId
+                if (valid) {
+                    ticket_valid_from.text = ticket.validFrom.subSequence(0,10)
+                    ticket_valid_until.text = ticket.validUntil.subSequence(0,10)
+                }
+                else {
+                    ticket_valid_from.text = "-"
+                    ticket_valid_until.text = "-"
+                }
+                color = 0xF1C40F.toInt()
+            }
+            "lineTicket" -> {
+                setContentView(R.layout.activity_user_lineticket)
+                if (valid) {
+                    ticket_valid_until.text = ticket.validUntil.subSequence(11,16)
+                }
+                else {
+                    ticket_valid_until.text = "-"
+                }
+                color = 0xE612B4AA.toInt()
+            }
+            "timeTicket" -> {
+                setContentView(R.layout.activity_user_timeticket)
+                if (valid) {
+                    ticket_valid_until.text = "${ticket.validUntil.subSequence(0,10)}. : ${ticket.validUntil.subSequence(11,16)}"
+                }
+                else {
+                    ticket_valid_until.text = "-"
+                }
+                color = 0x11ABDB.toInt()
+            }
+        }
 
-        val myBitmap = QRCode.from(ticket.id).withSize(500,500).bitmap()
+        val myBitmap = QRCode.from(ticket.id).withColor(0xFFFFFFFF.toInt(),color).withSize(500,500).bitmap()
         ticket_qr.setImageBitmap(myBitmap)
     }
 }
