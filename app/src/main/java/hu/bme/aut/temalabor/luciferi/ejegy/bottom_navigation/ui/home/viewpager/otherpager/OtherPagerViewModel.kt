@@ -8,7 +8,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 
 class OtherPagerViewModel : ViewModel() {
-    private var _tickets : MutableLiveData<List<UserTicket>>? = null
+    /*private var _tickets : MutableLiveData<List<UserTicket>>? = null
     init {
         if (_tickets == null) {
             //_tickets = RestApiRepository.getUserTickets()
@@ -23,6 +23,6 @@ class OtherPagerViewModel : ViewModel() {
             }
 */
         }
-    }
-    var tickets : LiveData<List<UserTicket>>? = _tickets
+    }*/
+    var tickets : LiveData<List<UserTicket>>? = RestApiRepository.liveInvalidUserTickets//_tickets
 }
