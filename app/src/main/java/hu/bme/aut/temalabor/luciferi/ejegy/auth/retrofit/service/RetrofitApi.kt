@@ -130,6 +130,7 @@ interface RetrofitApi {
 
 
     @POST("/tickets/inspect")
+    @FormUrlEncoded
     fun postTicketsInspect(
         @Field("id") ticketId: String,
         @Field("vehicleId") vehicleId: String

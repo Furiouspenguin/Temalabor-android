@@ -52,4 +52,7 @@
     <string name="logout">Logout</string>
     <string name="change_password">Change password</string>
     <string name="old_password">Old password</string>
+    <string name="status">Status</string>
+    <string name="user">User</string>
+    <string name="invalid">Invalid</string>
 </resources>

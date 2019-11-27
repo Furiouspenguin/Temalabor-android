@@ -56,4 +56,5 @@ object RestApiRepository {
     }
 
     var inspectorVehicle : String? = null
+    var inspectedTickets : List<UserTicket>? = null
 }

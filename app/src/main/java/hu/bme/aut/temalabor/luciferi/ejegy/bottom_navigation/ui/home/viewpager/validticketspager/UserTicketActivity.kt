@@ -14,11 +14,32 @@ class UserTicketActivity : AppCompatActivity() {
 
     private lateinit var ticket : UserTicket
     private var valid : Boolean = false
+    private lateinit var source : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         try {
+            source = intent.getStringExtra("source")
+            when(source) {
+                "valid" -> {
+                    ticket = RestApiRepository.liveValidUserTickets.value!![intent.getIntExtra("position",-1)]
+                    valid = true
+                    showTicketData()
+                }
+                "invalid" -> {
+                    ticket = RestApiRepository.liveInvalidUserTickets.value!![intent.getIntExtra("position",-1)]
+                    valid = false
+                    showTicketData()
+                }
+                "inspected" -> {
+                    ticket = RestApiRepository.inspectedTickets!![intent.getIntExtra("position",-1)]
+                    valid = true
+                    showTicketData()
+                }
+            }
             valid = intent.getBooleanExtra("valid",false)
             if (valid) {
                 ticket = RestApiRepository.liveValidUserTickets.value!![intent.getIntExtra("position",-1)]
@@ -30,7 +51,10 @@ class UserTicketActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        title = ticket.ticketType.name
+
+    }
+
+    private fun showTicketData(){
         var color : Int = 0x11ABDB.toInt()
 
         when(ticket.ticketType.type) {
@@ -89,6 +113,7 @@ class UserTicketActivity : AppCompatActivity() {
             }
         }
 
+        title = ticket.ticketType.name
         val myBitmap = QRCode.from(ticket.id).withColor(0xFFFFFFFF.toInt(),color).withSize(500,500).bitmap()
         ticket_qr.setImageBitmap(myBitmap)
     }

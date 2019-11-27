@@ -13,4 +13,6 @@
     <color name="gray">#61000000</color>
     <color name="turquoise">#E612B4AA</color>
     <color name="gold">#F1C40F</color>
+    <color name="green_OK">#a4e3b7</color>
+    <color name="red_BAD">#ff0000</color>
 </resources>

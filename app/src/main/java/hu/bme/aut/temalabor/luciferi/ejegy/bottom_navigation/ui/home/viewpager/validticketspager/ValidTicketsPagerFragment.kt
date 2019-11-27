@@ -75,7 +75,7 @@ class ValidTicketsPagerFragment : Fragment(){
             override fun onItemClick(ticketPosition: Int) {
                 startActivity<UserTicketActivity>(
                     "position" to ticketPosition,
-                    "valid" to true
+                    "source" to "valid"
                 )
             }
         })

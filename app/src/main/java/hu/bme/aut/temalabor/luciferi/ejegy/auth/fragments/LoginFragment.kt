@@ -86,7 +86,7 @@ class LoginFragment :Fragment(){
                         //bejelentkezési adatok elmentése
                         Thread(){
                             db.userDao().add(User(email = usernameString, password = passwordString))
-                            toast("data set")
+                            //toast("data set")
                         }.start()
 
                         //adatok elmentése

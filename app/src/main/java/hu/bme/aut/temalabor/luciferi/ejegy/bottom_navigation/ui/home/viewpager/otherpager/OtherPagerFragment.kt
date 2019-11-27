@@ -49,7 +49,7 @@ class OtherPagerFragment : Fragment(){
             override fun onItemClick(ticketPosition: Int) {
                 startActivity<UserTicketActivity>(
                     "position" to ticketPosition,
-                    "valid" to false
+                    "source" to "invalid"
                 )
             }
         })
