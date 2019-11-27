@@ -12,14 +12,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserData
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import org.jetbrains.anko.longToast
 
-
-//TODO: REPOSITORY + LIVEDATA KELL!!!!!!!!!!
-
-//TODO: ez legyen az indító és ha ezen teszteljük hogy be vagyunk-e jelentkezve (getUser() hívás ha rossz, akkor loginra küld)
-
 class MainActivity : AppCompatActivity() {
-
-    var userData : UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +30,5 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        userData = RestApiRepository.getUserData().value
     }
 }

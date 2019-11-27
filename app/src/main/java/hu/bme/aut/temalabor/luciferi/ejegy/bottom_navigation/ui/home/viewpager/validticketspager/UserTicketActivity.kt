@@ -18,20 +18,14 @@ class UserTicketActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         try {
             valid = intent.getBooleanExtra("valid",false)
             if (valid) {
-                //ticket = RestApiRepository.getValidUserTickets().value!![intent.getIntExtra("position",-1)]
-
-                
-                
                 ticket = RestApiRepository.liveValidUserTickets.value!![intent.getIntExtra("position",-1)]
 
             } else {
-                ticket = RestApiRepository.getInvalidUserTickets().value!![intent.getIntExtra("position",-1)]
+                ticket = RestApiRepository.liveInvalidUserTickets.value!![intent.getIntExtra("position",-1)]
             }
-
         } catch (e : Exception) {
             e.printStackTrace()
         }

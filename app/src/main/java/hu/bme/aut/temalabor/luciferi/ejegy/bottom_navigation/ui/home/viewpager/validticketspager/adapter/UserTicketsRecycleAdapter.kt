@@ -10,13 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.temalabor.luciferi.ejegy.R
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.UserTicket
 
-class UserTicketsRecycleAdapter :
+class UserTicketsRecycleAdapter(val context: Context) :
     RecyclerView.Adapter<UserTicketsRecycleAdapter.MyViewHolder>() {
 
-    lateinit var context: Context
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        context = parent.context
         val v = LayoutInflater.from(parent.context).inflate(R.layout.listitem_usertickets,parent,false)
         return MyViewHolder(v)
     }
@@ -60,12 +57,6 @@ class UserTicketsRecycleAdapter :
     fun setOnItemCickListener(listener : OnItemClickListener){
         this.listener = listener
     }
-/*
-    fun clearList(){
-        val size = tickets.size
-        tickets.clear()
-        notifyItemRangeRemoved(0,size)
-    }*/
 
     fun addTicket(ticket: UserTicket?) {
         ticket ?: return

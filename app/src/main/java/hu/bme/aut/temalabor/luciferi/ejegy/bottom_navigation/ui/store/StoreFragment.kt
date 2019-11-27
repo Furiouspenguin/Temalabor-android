@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -17,10 +14,7 @@ import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.model.TicketTypeWithPri
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.store.adapter.StoreRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_store.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 
 class StoreFragment : Fragment() {
 

@@ -2,13 +2,11 @@ package hu.bme.aut.temalabor.luciferi.ejegy.bottom_navigation.ui.home.viewpager.
 
 import android.app.Activity
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.zxing.Result
 import hu.bme.aut.temalabor.luciferi.ejegy.auth.retrofit.service.RetrofitClient
 import hu.bme.aut.temalabor.luciferi.ejegy.repositories.RestApiRepository
 import me.dm7.barcodescanner.zxing.ZXingScannerView
-import okhttp3.ResponseBody
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import java.lang.Exception
@@ -28,7 +26,6 @@ class QRScannerActivity : Activity(), ZXingScannerView.ResultHandler {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     override fun onResume() {
@@ -49,7 +46,7 @@ class QRScannerActivity : Activity(), ZXingScannerView.ResultHandler {
             "validate" -> {
                 MyAsyncValidate(rawResult.toString()) {
                     toast(it)
-                    RestApiRepository.setUserTicketsFromApi()
+                    RestApiRepository.setUserTicketsFromBackend()
                 }.execute()
             }
             "inspect" -> {

@@ -69,7 +69,7 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
                             loading.visibility = View.GONE
                         }.execute()
                         finish()
-                        RestApiRepository.setUserTicketsFromApi()
+                        RestApiRepository.setUserTicketsFromBackend()
                     }
 
                     buy_id_number.text = RestApiRepository.getUserData().value?.idCard
@@ -86,7 +86,7 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
                             loading.visibility = View.GONE
                         }.execute()
                         finish()
-                        RestApiRepository.setUserTicketsFromApi()
+                        RestApiRepository.setUserTicketsFromBackend()
                     }
                 }
                 "timeTicket" -> {
@@ -119,7 +119,7 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
                             loading.visibility = View.GONE
                         }.execute()
                         finish()
-                        RestApiRepository.setUserTicketsFromApi()
+                        RestApiRepository.setUserTicketsFromBackend()
                     }
                 }
             }
@@ -140,11 +140,6 @@ class BuyTicketActivity : AppCompatActivity(), DatePickerDialogFragment.DateList
     fun setValidFrom(v : View) {
         val datePicker = DatePickerDialogFragment((type == "passTicket"))
         datePicker.show(supportFragmentManager,DatePickerDialogFragment.TAG)
-    }
-
-    fun setValidUntil(v : View) {
-        //toast("Function not yet implemented")
-        //Nem reális hogy bárkinek kellene
     }
 
     override fun onPassDateSelected(day: Int, month: Int, year: Int) {
