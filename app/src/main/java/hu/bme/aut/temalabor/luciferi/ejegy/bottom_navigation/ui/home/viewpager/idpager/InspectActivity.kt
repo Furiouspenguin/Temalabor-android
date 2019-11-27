@@ -32,9 +32,17 @@ class InspectActivity : AppCompatActivity() {
                 }
                 else {
                     title = getString(R.string.user)
-                    inspect_id.text = it.user.id
+                    inspect_idcard.text = it.user.idCard
                     inspect_name.text = it.user.name
-                    inspect_type.text = it.user.type
+
+                    inspect_type.text = when(it.user.type) {
+                        "user" -> getString(R.string.type_user)
+                        "admin" -> getString(R.string.type_admin)
+                        "inspector" -> getString(R.string.type_inspector)
+                        "elder" -> getString(R.string.type_elder)
+                        else -> ""
+                    }
+
                     if (it.status == "validated") {
                         inspect_status.text = getString(R.string.valid)
                         inspect_rl_status.background = ContextCompat.getDrawable(this,R.color.green_OK)

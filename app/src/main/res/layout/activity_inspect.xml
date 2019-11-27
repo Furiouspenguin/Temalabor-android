@@ -67,12 +67,12 @@
             android:id="@+id/_inspect_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/id_number"
+            android:text="@string/id_card"
             android:textSize="14sp"
             android:layout_alignParentStart="true"/>
 
         <TextView
-            android:id="@+id/inspect_id"
+            android:id="@+id/inspect_idcard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"

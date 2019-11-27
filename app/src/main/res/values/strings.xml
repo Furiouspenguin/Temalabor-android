@@ -55,4 +55,9 @@
     <string name="status">Status</string>
     <string name="user">User</string>
     <string name="invalid">Invalid</string>
+    <string name="id_card">ID card number</string>
+    <string name="type_user">Normal</string>
+    <string name="type_admin">Admin</string>
+    <string name="type_inspector">Inspector</string>
+    <string name="type_elder">Elder</string>
 </resources>

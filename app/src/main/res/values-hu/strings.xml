@@ -56,4 +56,9 @@
     <string name="status">Érvényesség</string>
     <string name="user">Felhasználó</string>
     <string name="invalid">Érvénytelen</string>
+    <string name="id_card">Személyigazolvány szám</string>
+    <string name="type_user">Normál</string>
+    <string name="type_admin">Admin</string>
+    <string name="type_inspector">Ellenőr</string>
+    <string name="type_elder">Nyugdíjas</string>
 </resources>
